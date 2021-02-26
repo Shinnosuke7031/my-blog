@@ -1,61 +1,37 @@
 import { Fragment, FC, useEffect } from 'react'
-import Head from 'next/head'
-import MyLayout from '../components/MyLayout'
-
-import fs from 'fs'
-import { GetStaticProps } from 'next'
 import ReactMarkdown from 'react-markdown'
 import matter from "gray-matter";
 import CodeBlock from '../components/CodeBlock'
 
-type StaticProps = {
-  blogData: string
+type BlogContentProps = {
+  blogStringData: string
   title: string
   description: string
 }
 
-// type typeBlogData = {
-//   slug: string
-//   title: string
-//   description: string
-//   date: string
-//   tag: string | string[]
-// }
 
-// type typeMatteredData = {
-//   content: string
-//   data: typeBlogData
-// }
-
-const Home: FC<StaticProps> = (props) => {
-  const tmp = matter(props.blogData)
-  const content = tmp.content
-  console.log("Index -> props", props);
+const BlogContent: FC<BlogContentProps> = (props) => {
+  const matteredData = matter(props.blogStringData)
+  const content = matteredData.content
+  const data = matteredData.data
   return (
     <Fragment>
-      <Head>
-        <title>{props.title}</title>
-      </Head>
-      <MyLayout>
-        <p>This is Nosuke Blog</p>
+      <h1>{data.title}</h1>
+      <p className='date'>{data.date}</p>
+      <div className='blog'>{/* 記事内のpタグの行間を大きくする */}
         <ReactMarkdown renderers={{code: CodeBlock}}>{content}</ReactMarkdown>
-
-      </MyLayout>
+      </div>
+      <style jsx>{`
+        h1 {
+          font-size: 5vh;
+        }
+        .date {
+          text-align: right;
+          text-decoration: underline;
+        }
+      `}</style>
     </Fragment>
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const siteData = await import(`../../config.json`);
-  const blogData = fs.readFileSync(process.cwd() + '/docs/terms.md', 'utf8')
-
-  return {
-    props: {
-      blogData: blogData,
-      title: siteData.default.title,
-      description: siteData.default.description,
-    },
-  };
-}
-
-export default Home
+export default BlogContent

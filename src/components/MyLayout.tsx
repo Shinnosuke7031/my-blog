@@ -26,8 +26,9 @@ const MyLayout: FC<ReactNode> = (props) => (
       }
       .box {
         padding: 10px;
-        margin: 20px 10px;
+        margin: 20px auto;
         height: 100%;
+        width: 700px;
       }
       .nav {
         position: relative;

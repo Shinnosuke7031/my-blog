@@ -1,45 +1,31 @@
 import { Fragment, FC, useEffect } from 'react'
 import Head from 'next/head'
 import MyLayout from '../components/MyLayout'
-
 import fs from 'fs'
 import { GetStaticProps } from 'next'
-import ReactMarkdown from 'react-markdown'
-import matter from "gray-matter";
-import CodeBlock from '../components/CodeBlock'
+import BlogContent  from '../components/BlogContent'
+import NewArrivalsList from '../components/NewArrivalsList'
 
 type StaticProps = {
-  blogData: string
+  blogData: string[]
   title: string
   description: string
 }
 
-// type typeBlogData = {
-//   slug: string
-//   title: string
-//   description: string
-//   date: string
-//   tag: string | string[]
-// }
-
-// type typeMatteredData = {
-//   content: string
-//   data: typeBlogData
-// }
 
 const Home: FC<StaticProps> = (props) => {
-  const tmp = matter(props.blogData)
-  const content = tmp.content
-  console.log("Index -> props", props);
+  const blogData = props.blogData
+  const title = props.title
+  const description = props.description
+  // console.log(props.blogData)
   return (
     <Fragment>
       <Head>
         <title>{props.title}</title>
       </Head>
       <MyLayout>
-        <p>This is Nosuke Blog</p>
-        <ReactMarkdown renderers={{code: CodeBlock}}>{content}</ReactMarkdown>
-
+        <NewArrivalsList blogData={blogData} />
+        {/* {blogData.map((blog, index) => <BlogContent key={index} blogData={blog} title={title} description={description} />)} */}
       </MyLayout>
     </Fragment>
   )
@@ -47,15 +33,25 @@ const Home: FC<StaticProps> = (props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const siteData = await import(`../../config.json`);
-  const blogData = fs.readFileSync(process.cwd() + '/docs/terms.md', 'utf8')
+  const files = fs.readdirSync(process.cwd() + '/docs', 'utf8')
 
+  const blogs = files.filter((fn) => fn.endsWith(".md"))
+
+  const blogData = blogs.map((blog) => {
+    const path = `${process.cwd()}/docs/${blog}`
+    const data = fs.readFileSync(path, {
+      encoding: "utf-8",
+    })
+    return data
+  })
+    
   return {
     props: {
       blogData: blogData,
       title: siteData.default.title,
       description: siteData.default.description,
     },
-  };
+  }
 }
 
 export default Home

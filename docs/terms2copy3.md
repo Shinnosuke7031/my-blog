@@ -1,5 +1,5 @@
 ---
-slug: terms2
+slug: terms2copy3
 title: My Second Blog
 description: This Description Of My Second Blog.
 date: 25-September-2020

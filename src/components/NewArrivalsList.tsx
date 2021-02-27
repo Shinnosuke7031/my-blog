@@ -14,15 +14,20 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       position: 'relative',
       overflow: 'auto',
-      maxHeight: 175,
+      maxHeight: 1000,
     },
     listSection: {
       backgroundColor: 'inherit',
     },
-    ul: {
-      backgroundColor: 'inherit',
-      padding: 0,
+    flexContent: {
+      display: 'flex',
     },
+    title: {
+      fontWeight: 'bold'
+    },
+    date: {
+      textAlign: 'right',
+    }
   }),
 );
 
@@ -39,6 +44,7 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
       <List className={classes.root}>
         <ul>
           {blogDataArray.map((blog, index) => (
+            
             <Link
               href={{
                 pathname: '/blog/[slug]',
@@ -46,21 +52,31 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
               }}
               key={index}
             >
-              <ListItem key={index}>
-                <ListItemText primary={blog.title} className={classes.listSection} />
-                <ListItemText primary={blog.description} />
-                <ListItemText primary={blog.date} />
-                {Array.isArray(blog.tag) 
-                ? blog.tag.map((tagElement, index) => <ListItemText key={index} primary={tagElement} />)
-                : <ListItemText primary={blog.tag} />
-              }
-              </ListItem>
+              <div>
+                <ListItem divider={true} className={classes.flexContent}>
+                  <ListItemText className={`${classes.title} ${classes.listSection}`} primary={blog.title} />
+                  {/* <ListItemText primary={blog.description} /> */}
+                  <ListItemText className={classes.date} primary={blog.date} />
+                  {/* {Array.isArray(blog.tag) 
+                  ? blog.tag.map((tagElement, index) => <ListItemText key={index} primary={tagElement} />)
+                  : <ListItemText primary={blog.tag} />
+                  } */}
+                </ListItem>
+              </div>
             </Link>
           ))}
         </ul>
         <style jsx>{`
           ul {
             cursor: pointer;
+            padding: 0;
+          }
+          div {
+            list-style: none;
+            margin: 0;
+          }
+          div :hover {
+            background-color: rgb(160, 160, 160);
           }
         `}</style>
       </List>

@@ -2,6 +2,7 @@ import { Fragment, FC, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import matter from "gray-matter";
 import CodeBlock from '../components/CodeBlock'
+import MarkdownImg from '../components/MarkdownImg'
 
 type BlogContentProps = {
   blogStringData: string
@@ -19,7 +20,7 @@ const BlogContent: FC<BlogContentProps> = (props) => {
       <h1>{data.title}</h1>
       <p className='date'>{data.date}</p>
       <div className='blog'>{/* 記事内のpタグの行間を大きくする */}
-        <ReactMarkdown renderers={{code: CodeBlock}}>{content}</ReactMarkdown>
+        <ReactMarkdown renderers={{code: CodeBlock, image: MarkdownImg}}>{content}</ReactMarkdown>
       </div>
       <style jsx>{`
         h1 {

@@ -11,7 +11,6 @@ const CodeBlock: React.FC<P> = ({ language, value }) => {
   // Markdownで```javascript:hoge.jsx ...```と入力すると、languageにjavascript:hoge.jsxが入る
   // そのため、':'で分けて、コードの言語とファイル名をゲットだぜ
   const [ codeLanguage, fname ] = language!=="none" ? language.split(':') : [undefined, 'none']
-  console.log(fname)
   return (
     <React.Fragment>
       {fname !== "none" && fname !== "" && <p className='fname'>&nbsp;{fname}&nbsp;</p>}

@@ -21,9 +21,7 @@ tag:
 中々大変だったので、この記事にまとめてみました!
 
 # Lumen, Nginx, MySQL導入
-:::message
 Docker-composeが使える前提で書いているのでご注意ください
-:::
 
 ## ディレクトリ構成
 

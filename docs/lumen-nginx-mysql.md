@@ -29,7 +29,7 @@ Docker-composeが使える前提で書いているのでご注意ください
 
 まず最初に、ディレクトリ構成を見ていきましょう！
 
-```
+```none
 ├── Docker
 │   ├── mysql
 │   │   ├── Dockerfile
@@ -187,20 +187,20 @@ LumenとMySQLのv8は相性が悪いみたいで、この設定をしないとLu
 詳しくは、[こちらの記事](https://qiita.com/ucan-lab/items/3ae911b7e13287a5b917)を参照。
 
 ここで、コンテナを立ち上げます。
-```
+```none
 $ docker-compose up -d
 ```
 そして、MySQLのコンテナに入りましょう。
-```
+```none
 $ docker-compose exec mysql
 ```
 MySQL起動
-```
+```none
 $ mysql -u root -p
 ```
 `docker-compose.yml`で設定したパスワードを入力してMySQLを触れるようになります。
 続いて、DBの作成
-```
+```none
 mysql> CREATE DATABASE test;
 ```
 `$ exit`を2回打ってMySQLとコンテナから出ましょう。
@@ -216,11 +216,11 @@ mysql> CREATE DATABASE test;
 
 ## Migration
 まずは、以下のコマンドでLumenのコンテナに入っていきます。
-```
+```none
 docker-compose exec backend bash
 ```
 続いて、
-```
+```none
 $ php artisan make:migration create_articles_table --create=articles
 ```
 とすると、`/backend/database/migrations/タイムスタンプ_create_articles_table.php`が生成されます。
@@ -263,13 +263,13 @@ class CreateArticleTable extends Migration
 }
 ```
 編集後、以下のコマンドを実行。
-```
+```none
 $ php artisan migrate
 ```
 ここで、`$ exit`のコマンドで一回コンテナから出ます。
 その後、MySQLのコンテナに入ってデータベースがあるか確認してみてください。
 そして、適当にデータをINSERTしておきましょう。
-```
+```none
 mysql> INSERT INTO tests (name, comment, created_at, updated_at) VALUE 
 	('testman1', 'HELLO!', NOW(), NOW()),('testman2', 'HELLO!', NOW(), NOW()),
 ```

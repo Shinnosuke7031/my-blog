@@ -2,11 +2,14 @@ import Head from 'next/head'
 import React from 'react'
 import PropTypes from 'prop-types'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import * as gtag from '../libs/gtag'
+import { useRouter } from 'next/router'
 
 import '../styles/globals.css'
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
+  const router = useRouter();
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
@@ -15,6 +18,21 @@ export default function MyApp(props) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
   }, []);
+
+  React.useEffect(() => {
+    if (!gtag.existsGaId) {
+      return
+    }
+
+    const handleRouteChange = (path) => {
+      gtag.pageview(path)
+    }
+
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <React.Fragment>

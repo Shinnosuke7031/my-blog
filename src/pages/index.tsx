@@ -28,6 +28,7 @@ const Home: FC<StaticProps> = (props) => {
     <Fragment>
       <Head>
         <title>{title}</title>
+        {/* <meta name="description" content={description} /> */}
       </Head>
       <MyLayout>
         <div className='navbar'>

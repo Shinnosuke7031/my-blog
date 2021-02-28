@@ -1,5 +1,5 @@
 ---
-slug: terms2copy
+slug: test
 title: My Second Blog
 description: This Description Of My Second Blog.
 date: 2021/2/26

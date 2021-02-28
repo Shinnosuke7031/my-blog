@@ -2,7 +2,8 @@
 slug: scala-akka-easy-api
 title: (Scala + Akka HTTP編)バックエンド初心者が簡単なAPIを作って学ぶ
 description: バックエンドの勉強のため、Scalaで簡単なAPIを作りました
-date: 2021/02/27
+date: 2021/2/27
+type: tech
 tag: 
 - Scala
 - バックエンド

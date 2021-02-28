@@ -2,7 +2,8 @@
 slug: terms2copy2
 title: My Second Blog
 description: This Description Of My Second Blog.
-date: 25-September-2020
+date: 2021/2/25
+type: diary
 tag: 
 - test
 - aaa

@@ -1,4 +1,5 @@
 import {FC, ReactNode} from 'react'
+import Footer from './Footer'
 import Header from './Header'
 
 const MyLayout: FC<ReactNode> = (props) => (
@@ -10,6 +11,7 @@ const MyLayout: FC<ReactNode> = (props) => (
           {props.children}
         </div>
       </div>
+      <Footer />
     </div>
     
     <style jsx>{`

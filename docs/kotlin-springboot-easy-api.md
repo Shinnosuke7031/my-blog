@@ -2,7 +2,8 @@
 slug: kotlin-springboot-easy-api
 title: (Kotlin + Spring Boot編)バックエンド初心者が簡単なAPIを作って学ぶ
 description: This Description Of My Second Blog.
-date: 2021/02/27
+date: 2021/2/27
+type: tech
 tag: 
 - Kotlin
 - バックエンド

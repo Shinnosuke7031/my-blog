@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       position: 'relative',
       overflow: 'auto',
-      maxHeight: 1000,
+      maxHeight: 375,
     },
     listSection: {
       backgroundColor: 'inherit',
@@ -54,7 +54,11 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
             >
               <div>
                 <ListItem divider={true} className={classes.flexContent}>
-                  <ListItemText className={`${classes.title} ${classes.listSection}`} primary={blog.title} />
+                  { index > 2 ? 
+                    <ListItemText className={`${classes.title} ${classes.listSection}`} primary={blog.title} /> :
+                    <ListItemText className={`${classes.title} ${classes.listSection}`} primary={`　　 ${blog.title}`} />
+                  }
+                  { !(index > 2) && <p className='fuwafuwa'>NEW!!</p>}
                   {/* <ListItemText primary={blog.description} /> */}
                   <ListItemText className={classes.date} primary={blog.date} />
                   {/* {Array.isArray(blog.tag) 
@@ -77,6 +81,26 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
           }
           div :hover {
             background-color: rgb(160, 160, 160);
+          }
+          p {
+            position: absolute;
+            left: 0.3rem;
+            color: #be0000
+          }
+          .fuwafuwa {
+            -webkit-animation:fuwafuwa 2s infinite linear alternate;
+            animation:fuwafuwa 2s infinite linear alternate;
+          }
+          @-webkit-keyframes fuwafuwa {
+            0% {-webkit-transform:translate(0, 0) rotate(-5deg);}
+            50% {-webkit-transform:translate(0, -5px) rotate(0deg);}
+            100% {-webkit-transform:translate(0, 0)rotate(5deg);}
+          }
+
+          @keyframes fuwafuwa {
+            0% {transform:translate(0, 0) rotate(-5deg);}
+            50% {transform:translate(0, -5px) rotate(0deg);}
+            100% {transform:translate(0, 0)rotate(5deg);}
           }
         `}</style>
       </List>

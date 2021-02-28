@@ -28,7 +28,7 @@ const Home: FC<StaticProps> = (props) => {
     <Fragment>
       <Head>
         <title>{title}</title>
-        {/* <meta name="description" content={description} /> */}
+        <meta name="description" content={description} />
       </Head>
       <MyLayout>
         <div className='navbar'>
@@ -119,7 +119,7 @@ export const getStaticProps: GetStaticProps = async () => {
   })
   
   for (let index = 0; index < blogDateArray.length-1; index++) {
-    for (let index2 = index; index2 < blogDateArray.length; index2++) {
+    for (let index2 = 0; index2 < blogDateArray.length; index2++) {
 
       if (blogDateArray[index2] < blogDateArray[index2+1]) {
         let tmp = blogDateArray[index2]

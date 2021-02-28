@@ -3,16 +3,15 @@ import Footer from './Footer'
 import Header from './Header'
 
 const MyLayout: FC<ReactNode> = (props) => (
-  <div>
-    <div className="container">
-      <Header />
-      <div className="main">
-        <div className="box">
-          {props.children}
-        </div>
+  <div className="container">
+    <Header />
+    <div className="main">
+      <div className="box">
+        {props.children}
       </div>
-      <Footer />
     </div>
+    <Footer />
+    
     
     <style jsx>{`
       .container {

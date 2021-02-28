@@ -39,7 +39,6 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
   const classes = useStyles();
   const matteredData = props.blogData.map(blog => matter(blog))
   const blogDataArray = matteredData.map(el => el.data)
-  console.log(blogDataArray)
   return (
       <List className={classes.root}>
         <ul>

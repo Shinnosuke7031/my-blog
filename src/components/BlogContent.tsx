@@ -19,7 +19,7 @@ const BlogContent: FC<BlogContentProps> = (props) => {
   return (
     <Fragment>
       <Head>
-        {/* <meta name="description" content={data.date} /> */}
+        <meta name="description" content={data.description} />
       </Head>
       <h1>{data.title}</h1>
       <p className='date'>{data.date}</p>

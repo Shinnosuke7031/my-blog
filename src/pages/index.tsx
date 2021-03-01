@@ -1,4 +1,4 @@
-import { Fragment, FC, useEffect } from 'react'
+import { Fragment, FC } from 'react'
 import Head from 'next/head'
 import MyLayout from '../components/MyLayout'
 import fs from 'fs'
@@ -32,9 +32,9 @@ const Home: FC<StaticProps> = (props) => {
       </Head>
       <MyLayout>
         <div className='navbar'>
-          <div><Link href='about'><a className='nav-el'><AccountBoxIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Me</p>  </a></Link></div>
-          <div><Link href='about'><a className='nav-el'><WebAssetIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Site</p>  </a></Link></div>
-          <div><Link href='about'><a className='nav-el'><MailOutlineIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>Contact</p> </a></Link></div>
+          <div><Link href='about-me'><a className='nav-el'><AccountBoxIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Me</p>  </a></Link></div>
+          <div><Link href='about-site'><a className='nav-el'><WebAssetIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Site</p>  </a></Link></div>
+          <div><Link href='contact'><a className='nav-el'><MailOutlineIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>Contact</p> </a></Link></div>
         </div>
         <br />
         <div className='navbar navbar2'>

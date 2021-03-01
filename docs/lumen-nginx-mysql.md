@@ -320,5 +320,3 @@ class TestsController extends Controller
 ## APIの確認
 `http://localhost:8080/api/v1/tests`に行くと、DBの内容が表示されていると思います。
 
-初めての投稿なので、説明が抜けてるところがあるかもしれません！
-何かありましたらコメントしていただけると幸いです。

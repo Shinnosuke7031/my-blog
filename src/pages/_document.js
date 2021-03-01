@@ -32,6 +32,19 @@ export default class MyDocument extends Document {
             </>
           )}
           <script data-ad-client="ca-pub-1651494766691774" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+          {/* <ins class="adsbygoogle"
+               style={{display: "block", textAlign: "center"}}
+               data-ad-layout="in-article"
+               data-ad-format="fluid"
+               data-ad-client="ca-pub-1651494766691774"
+               data-ad-slot="5843528435" /> */}
+          <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            (adsbygoogle = window.adsbygoogle || []).push({});`,
+          }}
+          />
         </Head>
         <body>
           <Main />

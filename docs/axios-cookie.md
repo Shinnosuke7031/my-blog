@@ -1,12 +1,13 @@
 ---
 slug: axios-cookie
 title: AxiosのPOST通信でCookieをいじりたい
-description: AxiosのPOST通信でCookieを操作したい
+description: Reactで非同期通信(Ajax)をしたいとき、Axiosを使うことが多いと思います。そのPOST通信でCookieを操作したい時には、少し手間がかかるので、その説明をまとめました。私は、JWT認証したかったため、Cookieを操作する必要がありました。
 date: 2021/2/28
 type: tech
 tag: 
 - Cookie
 - Ajax
+- JWT
 ---
 
 # やりたいこと

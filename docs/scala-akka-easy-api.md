@@ -1,7 +1,7 @@
 ---
 slug: scala-akka-easy-api
 title: (Scala + Akka HTTP編)バックエンド初心者が簡単なAPIを作って学ぶ
-description: バックエンドの勉強のため、Scalaで簡単なAPIを作りました
+description: 色んな言語触ってAPI作ってみたいなーと思い(Go, Kotlin, Django, Flask, Express, ...)、その第1回はScalaで書いてみようと思いました。そこで、ScalaでAPIを作るのに便利なライブラリAkkaがあるとのことなので、これを使っていきます。 
 date: 2021/2/27
 type: tech
 tag: 
@@ -14,12 +14,16 @@ tag:
 
 
 色んな言語触ってAPI作ってみたいなーと思い(Go, Kotlin, Django, Flask, Express, ...)、その第1回はScalaで書いてみようと思いました。  
+
 そこで、ScalaでAPIを作るのに便利なライブラリ`Akka`があるとのことなので、これを使っていきます。  
+
 そもそもJavaは普段あまり使わなく、Scalaも[こちら](https://hexx.github.io/scala_text/)で勉強した程度です。  
+
 良くない部分がありましたら、ぜひ教えてください。  
 
 # 前提と目標
 javaが動く環境は用意できている前提で書いていきます。  
+
 ビルドにはsbtを使っていきます。
 
 また、[公式のドキュメント](https://doc.akka.io/docs/akka-http/current/introduction.html)を参考に行います。
@@ -78,7 +82,9 @@ object HttpServerRoutingTest {
 }
 ```
 ターミナルで`sbt run`と打つと実行されます。そして、ブラウザで`http://localhost:8080/hello`をみてみると、「Hello akka-http world!!」と表示されます！
+
 これでサーバーを起動できましたね。
+
 Returnキーを押すとシャットダウン。
 
 ## Jsonを返す
@@ -205,9 +211,13 @@ object JsonTest extends App with JsonService {
 だいぶスッキリしましたね！
 
 それでは、`sbt run`と打って実行しましょう。
+
 サーバーが起動したら、
+
 `curl -H "Content-Type: application/json" -X POST -d '{"items":[{"name":"aaaaa","id":10},{"name":"bbbbb","id":0}]}' http://localhost:8080/create-order`
+
 と新規ターミナルで打ちましょう。
+
 このコマンドで、
 ```json:
 [
@@ -216,11 +226,17 @@ object JsonTest extends App with JsonService {
 ]
 ```
 をPOSTで送ります。
+
 すると、
+
 `saved completely`
+
 とレスポンスがあると思います。
+
 次に、
+
 `curl http://localhost:8080/item/10`
+
 と打つと、idが10のJsonデータが返ってきます！
 
 # MySQLとの連携
@@ -244,6 +260,7 @@ libraryDependencies ++= Seq(
 )
 ```
 また、slickの設定を`/src/main/resources/application.conf`に書いていきます。
+
 MySQLの環境は各自で用意お願いします。私は、DockerでMySQLのコンテナを立ち上げてます。
 ```conf:application.conf
 slick-mysql = {
@@ -371,19 +388,28 @@ trait JsonMethods extends MysqlService {
 `db.run(...)`と記述するとデータベースを操作できるんですね!
 ## 動作確認
 それでは、`sbt run`と打って実行しましょう。
+
 サーバーが起動したら、
+
 `curl -H "Content-Type: application/json" -X POST -d '{"items":[{"name":"aaaaa","num":10},{"name":"bbbbb","num":0}]}' http://localhost:8080/create-order`
+
 と新規ターミナルで打ちましょう。
+
 すると、`saved completely`とレスポンスがあると思います。
+
 次に、`curl http://localhost:8080/item/10`と打つと、numが10のJsonデータが返ってきます！
 
 全章と違うのは、DB(MySQL)からデータを持ってきてるので、サーバーを落としても保存したデータは消えません。
 
 # まとめ
 春休み企画(仮)の第１弾として、Scalaを学ぶために「Scala + Akka HTTP」で簡単なAPIを作ってみました。
+
 Reactを触り始めた頃を思い出しましたww
+
 Scalaは、基本をわかってないと至る所でハマってしまい難しいなと感じました。
+
 しかし、DBの接続からJsonを返すところまでコンパクトに書けることに感動しました。
+
 今回で、Scalaとの距離が縮まったと思うので、これからも仲良くできたらいいな。。。
 
 Scalaはまだまだ初心者なので、今回のコードでNGな部分やもっと上手くかけるところがありましたらアドバイスお願いします🤲

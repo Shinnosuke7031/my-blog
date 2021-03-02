@@ -1,7 +1,7 @@
 ---
 slug: make-next-blog
 title: Next.jsでSSGブログサイトを作った話
-description: 当サイトは、Next.jsで作りました。なぜNext.jsを採用したのかを書いていきます。
+description: 当サイトは、Next.jsで作りました。なぜNext.jsを採用したのかを書いていきます。最も大きな理由はSSG(静的サイト生成)です。また、ルーティングもすごく簡単で、ストレスフリーに開発できます。
 date: 2021/3/2
 type: tect
 tag: 
@@ -10,194 +10,150 @@ tag:
 ---
 
 # 初めに
-create-react-app(CRA)は簡単にReactのプロジェクトができますが、環境構築については丸投げでブラックボックスになってしまう。。。
-しかも、無駄なファイルがある。。。
+最近、QiitaやZennでブログを書いていましたが、だんだん自分でブログサイトを持ちたくなってきました。
 
-そこで、1から環境を構築してみます。
-注意 : Node.jsとnpmは使える前提で進めます
+そのため、自作でブログサイトを作ろうと思ったわけです。
 
-# 前置き
-React
-Reactは、フロントエンド開発において世界中でもっとも利用されているJavaScriptライブラリです。
+# なぜNext.jsなのか
+近年、Next.jsの盛り上がりがすごいです。ほんとに。
 
-主な特徴は以下の3つ！（詳細は公式サイト参照）
+それに便乗して僕も何か開発してみたかったのです。
 
-- 宣言的なview
-- コンポーネントベース
-- 一度学習すれば、どこでも使える
+例えば、[Appleの機械学習に関するサイト](https://machinelearning.apple.com/)や[Zenn](https://zenn.dev/)、[はてなブログのコーポレートサイト](https://hatenacorp.jp/)でも採用されています。
 
-## webpack
-webpackとは、複数のJavaScript(以下JS)ファイルを一つにまとめたJSファイルを生成してくれます。この、まとめる処理をバンドルと言います。
+もちろん、ただ流行りに乗りたかったわけではありません。
 
-このバンドルされたJSファイルをHTMLに埋め込むと、Reactで記述したものが表示されます。
+Next.jsには、以下のメリットがあります。
 
-## Babel
-こちらは、JavaScriptのコンパイラです。Reactには新しいJSを記述します。
-しかし、全てのブラウザが新しいバージョンのJSに対応しているわけではありません。
+## SSG(静的サイト生成)
+一番はこれ、SSG(Static Site Generation)です。
 
-そこで活躍するのがBabelです！新しいバージョンで書かれたJSを古いバージョンに変換してくれます。
-これによって、多くのブラウザでReactを動作させることができます。
+ビルド時に必要なデータをとってしまい、各ページのHTMLを生成してくれます。リクエストがあった場合は、このHTMLを返すだけです。
 
-# 環境構築
-## 開発環境の確認
-Node.jsとnpmは以下を想定しています。
+つまり、素のReactより表示が早いんです。
 
-```none
-$ node -v
-v12.18.0
+よく、CSR(クライアントサイド)とSSR(サーバーサイドレンダリング)で比較されます。
+
+CSRはブラウザでレンダリングするので、処理速度がユーザーのブラウザやデバイスの性能に依存します。
+
+SSRは、レンダリングされたものをサーバーから返すので、ページ内のコンテンツの表示は早いです。Next.jsで簡単に実装できます！
+
+「あれ？じゃあSSRで良くないか？」
+
+と思うかもしれませんが、SSRはリクエスト時にサーバーでレンダリングするので、閲覧者を待たせてしまいます。閲覧者は不安になりますよね。。。
+
+ということで、最も早く表示できるSSGで必要最低限なところは爆速で表示するようにしました。
+
+そして、必要な部分だけSSRするようにしました。
+
+
+SSGは、ビルド時にHTMLを生成するため、更新が頻繁に行われるサイトには向きません。
+
+しかし、ブログサイトは1日に何回も更新するわけではないので、SSGで十分かと思います。
+
+## ルーティング
+これまで、Reactでルーティングを実装するときは、react-routerを使っていました。
+
+使ったことがある方はわかると思いますが、結構とっかかりにくいですよね。
+
+リロードすると表示されなかったり。動的ルーティングも厄介です。
+
+Next.jsはこの辺のことは非常にシンプルになっています。
+
+例えば`/pages`や`/src/pages`に`index.jsx`や`hello.jsx`、`posts/[id].jsx`を配置すると
+- `index.jsx` 　　->　　 `/`
+- `hello.jsx` 　　->　　 `/hello`
+- `posts/[id].jsx` 　　->　　 `/posts/[id]`
+となります。
+
+動的ルーティングも簡単ですよね。
+
+## SEO
+SSGでは、すでにHTMLファイルがサーバー上にあるため、SEOが向上します。
+
+SSRでもSEOは向上しますが、サーバーの負荷が大きいです。
+
+# 使用技術・ライブラリ
+マークダウンでブログを書くので、これに関するライブラリについてです。
+
+## react-markdown
+マークダウンをHTMLに変換するものです。必須ですね。
+
+## react-syntax-highlighter
+ハイライトをつけるためのものです。主にコードのハイライトに使います。
+
+非常にシンプルで使いやすい。
+
+しかし、そのままではコードにファイル名をつけることができないため、自分で実装しました(後で記事にします)。
+
+↓こんなかんじ↓
+```typescript:Test.tsx
+import { FC } from 'react'
+
+const Test: FC<{}> = () => (<p>This is Test.tsx</p>)
+
+export default Test
 ```
 
-```none
-$ npm -v
-6.14.1
+## gray-matter
+マークダウンファイル(以下、mdファイル)に記述した記事自体だけでなく、記事のタイトルや日付などのフロントマッター(Front Matter)も取得するときに便利です。
+```md:test.md
+---
+slug: test-blog
+title: Test記事
+description: 当サイトは、Next.jsで作りました。
+date: 2021/3/2
+type: tect
+tag: 
+- hoge
+- hogehoge
+---
+# h1
+HogeHoge
+
 ```
-
-まずはディレクトリを作成して移動します。
-
-```none
-$ mkdir  rwp-study && cd rwp-study
-$ mkdir src dist
+このようなmdファイルがあったら、
+```javascript:
+import matter from "gray-matter"
+const matteredData = matter(props.blogStringData)
 ```
-```none
-$ npm init -y
+とすると、記事の本体である`matteredData.content`と記事のフロントマッター部分のメタ情報が入った`matteredData.data`でそれぞれ取得できます。
+
+マークダウン関係は以上です。
+
+## TypeScript
+やはり型をつけるとエラーがどこにあるかわかりやすくて良いですねー。開発効率上がりますよね。
+
+## Material-UI
+UIコンポーネントを提供してくれます。NOSUKE BLOGでは、トップページのLineUp部分に使ってます。
+
+## next/dynamic
+これは`import dynamic from 'next/dynamic'`と記述すると使用できます。
+
+もともとNext.jsに搭載されている機能なので、ここに載せるか悩んだのですが、工夫した点なので書きます。
+
+
+ブログ記事が多くなると、最初に取得するHTMLも増えてしまい大変なことになります。
+
+SEOに関係する記事のメタ情報を除き、記事本体はSSRするようにしました。
+
+先ほど、「SSRはリクエスト時にサーバーでレンダリングするので、閲覧者を待たせてしまいます」と記述したのですが、ヘッダーやフッター、ローディング画面などはすぐに表示されるので(SSG)、SSRを使いました。
+
+
+つまり、**SSGとSSRの融合**ですね。
+
+
+これを可能にするのがnext/dynamicです。
+```javascript:
+import dynamic from 'next/dynamic'
+const DynamicBlogContent = dynamic(
+  () => import('../../components/BlogContent'),
+  { loading: () => <div className={styles.loader}></div> }
+)
 ```
-## Reactのインストール
-```none
-$ npm i  react react-dom
-```
-## Babelのインストール
-```none
-$ npm i --save-dev babel-loader @babel/core @babel/preset-env @babel/preset-react
-```
-- babel-loader : webpackでBabelを使うために必要
-- @babel/core : Babelのコア
-- @babel/preset-env : コンパイルするときにターゲットを指定するもの
-- @babel/preset-react : Reactをコンパイルするもの
+DynamicBlogContentは通常のコンポーネントと同じ使い方ができます。
 
-## webpackのインストール
-```none
-$ npm i --save-dev webpack webpack-cli html-webpack-plugin webpack-dev-server
-```
-- webpack : webpack本体です！
-- webpack-cil : webpackをコマンド操作するのに必要
-- html-webpack-plugin : webpackでHTMLを操作するのに必要
-- webpack-dev-server : ローカル環境で開発するためのサーバー。ソースコードを変更すると検知してブラウザをリロードしてくれる。
-これで必要なものはインストールできました。これから設定していきます。
+なおかつ、DynamicBlogContentだけSSRできます。便利ですね〜
 
-# Babelの設定
-プロジェクトのルートに「.babelrc」を作成し、以下のように記述します。
-
-
-```:.babelrc
-{
-  "presets": [
-    "@babel/preset-env", // 新しいバージョンのJS -> 古いバージョンのJS(es5)
-    "@babel/preset-react" // React用のプラグイン
-  ]
-}
-```
-## webpackの設定
-プロジェクトのルートに「webpack.config.js」を作成し、以下のように記述します。
-
-```javascript:webpack.config.js
-const path = require('path');
-//webpackでHTMLを扱うためのプラグイン
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-module.exports = {
-  // bundleの開始位置
-  entry: './src/Index.js',
-  // bundleされたファイルの場所
-  output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist/'),
-  },
-  module: {
-    // babelで[js, jsx]をコンパイル
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/,
-      },
-    ],
-  },
-  // [/src/index.html]を[dist/index.html]に生成
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: 'index.html',
-    }),
-  ],
-  // webpack-dev-serverの設定
-  devServer: {
-        contentBase: path.join(__dirname, 'dist'),// ベースとなる参照するディレクトリ
-    port: 3000,
-    host: 'localhost',
-    open: true // サーバーを起動させたときにブラウザを開く
-    },
-};
-```
-## コンポーネントの作成
-「/src/Index.js」にコンポーネントを以下のように作成します。
-
-
-```javascript:Index.js
-import React from 'react';
-import ReactDOM from 'react-dom';
-const Index = () => {
-  return (
-    <h1>Hello React with webpack-Babel!!</h1>
-  );
-};
-ReactDOM.render(<Index />, document.getElementById('root'));
-```
-上記のJSファイルを埋め込むための「/src/index.html」を以下のように作成します。
-
-
-```javascript:index.html
-<!DOCTYPE html>
-<html lang="jp">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World</title>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
-```
-これで、各ファイルの準備ができました。
-
-しかし、開発サーバー(webpack-dev-server)の起動コマンドを設定していないため、「package.json」の"scripts"を以下のように変更します。
-
-```json:package.json
-"scripts": {
-  "start": "webpack serve --mode development",
-  "build": "webpack --progress --mode production"
-},
-```
-これで、環境構築各ファイルの準備ができました!
-
-## 開発サーバーの起動
-早速、サーバーを起動してみましょう。以下のコマンドを実行して起動できます。
-
-```none
-$ npm start
-```
-
-「http://localhost:3000」にこんな感じで表示されます。
-
-これで開発環境の構築が完了しました！
-
-「/src/Index.js」を変更すると、自動でリロードされるので確認してみて下さい！
-
-本番用にビルドする際は、
-
-```none
-$ npm run build
-```
-と打てば、「/dist」に「index.html」と「main.js」生成されます。
-
-デプロイするときは、この「index.html」と「main.js」を配置するだけで大丈夫です！
-例えば、GitHub pagesで公開する際は、「/dist」を公開するようにGitHub上で設定すればできます。
-
+# まとめ
+自分のブログサイトを持つこと、開発することは本当に楽しい！

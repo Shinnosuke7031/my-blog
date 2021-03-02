@@ -1,7 +1,7 @@
 ---
 slug: lumen-nginx-mysql
 title: Lumen(Laravel)+Nginx+MySQLで簡単なAPIを作成してみた
-description: Lumen(Laravel)+Nginx+MySQLで簡単なAPIを作成してみた
+description: 掲示板APIを、Lumen(Laravel)+Nginx+MySQLで作成したので、それぞれの重要なポイントやDocker-composeの設定などをまとめました。万能で機能がたくさんあるLaravelとは違い、軽量版であるLumenはハマりポイントがいくつもあって大変でした。
 date: 2021/3/1
 type: tech
 tag: 
@@ -145,7 +145,7 @@ display_errors = On
 
 # Nginxの設定
 図のように、フロントエンドからリクエストがあった際に、NginxからLumenに流れていくように設定していきます。
-![](https://storage.googleapis.com/zenn-user-upload/t69gi8a4ml6wuv9wsd165az1byn3 =250x)
+![](https://storage.googleapis.com/zenn-user-upload/t69gi8a4ml6wuv9wsd165az1byn3)
 
 ```conf:Docker/nginx/conf/default.conf
 server {

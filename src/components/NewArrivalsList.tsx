@@ -58,12 +58,7 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
                     <ListItemText className={`${classes.title} ${classes.listSection}`} primary={`　　 ${blog.title}`} />
                   }
                   { !(index > 2) && <p className='fuwafuwa'>NEW!!</p>}
-                  {/* <ListItemText primary={blog.description} /> */}
                   <ListItemText className={classes.date} primary={blog.date} />
-                  {/* {Array.isArray(blog.tag) 
-                  ? blog.tag.map((tagElement, index) => <ListItemText key={index} primary={tagElement} />)
-                  : <ListItemText primary={blog.tag} />
-                  } */}
                 </ListItem>
               </div>
             </Link>

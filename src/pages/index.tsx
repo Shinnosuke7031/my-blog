@@ -1,12 +1,19 @@
 import { Fragment, FC } from 'react'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 import MyLayout from '../components/MyLayout'
-import NewArrivalsList from '../components/NewArrivalsList'
 import NavOfSiteAndContactMe from '../components/NavOfSiteAndContactMe'
 import NavOfTwitterAndGithub from '../components/NavOfTwitterAndGithub'
 import fs from 'fs'
 import { GetStaticProps } from 'next'
 import matter from 'gray-matter'
+import styles from '../styles/animation.module.css'
+
+const DynamicNewArrivalsList = dynamic(
+  () => import('../components/NewArrivalsList'),
+  { loading: () => <div className={styles.loader}></div> }
+)
+
 
 type StaticProps = {
   blogData: string[]
@@ -33,8 +40,7 @@ const Home: FC<StaticProps> = (props) => {
           <p>また、それ以外にも日常的なことや趣味についても書いてます。</p>
         </div>
         <h1>Lineup</h1>
-        <NewArrivalsList blogData={blogData} />
-        {/* {blogData.map((blog, index) => <BlogContent key={index} blogData={blog} title={title} description={description} />)} */}
+        <DynamicNewArrivalsList blogData={blogData} />
       </MyLayout>
       <style jsx>{`
         h1 {

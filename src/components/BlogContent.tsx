@@ -3,12 +3,9 @@ import ReactMarkdown from 'react-markdown'
 import matter from "gray-matter";
 import CodeBlock from '../components/CodeBlock'
 import MarkdownImg from '../components/MarkdownImg'
-import Head from 'next/head'
 
 type BlogContentProps = {
   blogStringData: string
-  title: string
-  description: string
 }
 
 
@@ -18,9 +15,6 @@ const BlogContent: FC<BlogContentProps> = (props) => {
   const data = matteredData.data
   return (
     <Fragment>
-      <Head>
-        <meta name="description" content={data.description} />
-      </Head>
       <h1>{data.title}</h1>
       <p className='date'>{data.date}</p>
       <div className='blog'>{/* 記事内のpタグの行間を大きくする */}

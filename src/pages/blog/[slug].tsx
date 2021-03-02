@@ -1,10 +1,16 @@
 import { FC, Fragment } from "react"
-import MyLayout from '../../components/MyLayout'
 import { GetStaticProps } from "next"
+import Head from 'next/head'
+import dynamic from 'next/dynamic'
+import MyLayout from '../../components/MyLayout'
 import fs from 'fs'
 import matter from "gray-matter"
-import BlogContent  from '../../components/BlogContent'
-import Head from 'next/head'
+import styles from '../../styles/animation.module.css'
+
+const DynamicBlogContent = dynamic(
+  () => import('../../components/BlogContent'),
+  { loading: () => <div className={styles.loader}></div> }
+)
 
 type typeBlogDataArray = {
   slug: string
@@ -22,14 +28,17 @@ type BlogPageProps = {
 
 const BlogPage: FC<BlogPageProps> = (props) => {
   const title = matter(props.blogStringData).data.title
+  const description = matter(props.blogStringData).data.description
   return (
     <Fragment>
       <Head>
         <title>{title}</title>
+        <meta name="description" content={description} />
       </Head>
 
       <MyLayout>
-        <BlogContent blogStringData={props.blogStringData} title={props.title} description={props.description} />
+        {/* <BlogContent blogStringData={props.blogStringData} title={props.title} description={props.description} /> */}
+        <DynamicBlogContent blogStringData={props.blogStringData} />
       </MyLayout>
     </Fragment>
   )

@@ -12,9 +12,9 @@ const Footer: FC = () => {
     <footer>
       <div><a className='nav-el' href="https://github.com/Shinnosuke7031"><GitHubIcon style={{color: "#000000"}} fontSize='large' /> <p style={{color: "#000000"}}>GitHub</p> </a></div>
       <div><a className='nav-el' href="https://twitter.com/web7031boushi"><TwitterIcon fontSize='large' /> <p>Twitter</p> </a></div>
-      <div><Link href='about'><a className='nav-el'><AccountBoxIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Me</p>  </a></Link></div>
-      <div><Link href='about'><a className='nav-el'><WebAssetIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Site</p>  </a></Link></div>
-      <div><Link href='about'><a className='nav-el'><MailOutlineIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>Contact</p> </a></Link></div>
+      <div><Link href='/about-me'><a className='nav-el'><AccountBoxIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Me</p>  </a></Link></div>
+      <div><Link href='/about-site'><a className='nav-el'><WebAssetIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Site</p>  </a></Link></div>
+      <div><Link href='/contact'><a className='nav-el'><MailOutlineIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>Contact</p> </a></Link></div>
       <style jsx>{`
         footer {
           height: 5rem;

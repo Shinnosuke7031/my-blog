@@ -39,12 +39,12 @@ export default class MyDocument extends Document {
                data-ad-format="fluid"
                data-ad-client="ca-pub-1651494766691774"
                data-ad-slot="5843528435" /> */}
-          <script
+          {/* <script
           dangerouslySetInnerHTML={{
             __html: `
             (adsbygoogle = window.adsbygoogle || []).push({});`,
           }}
-          />
+          /> */}
         </Head>
         <body>
           <Main />

@@ -1,5 +1,4 @@
-import React from "react";
-import { FC } from "react";
+import { Fragment, FC } from "react"
 
 type Props = {
   src: string
@@ -8,11 +7,11 @@ type Props = {
 }
 
 const MarkdownImg: FC<Props> = (props) => (
-  <React.Fragment>
+  <Fragment>
     <br/>
     <img src={props.src} alt={props.alt} title={props.title} width='70%' />
     <br />
-  </React.Fragment>
+  </Fragment>
 )
 
 export default MarkdownImg

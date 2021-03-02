@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import { FC, Fragment } from "react"
 import MyLayout from '../../components/MyLayout'
 import { GetStaticProps } from "next"
 import fs from 'fs'
@@ -23,7 +23,7 @@ type BlogPageProps = {
 const BlogPage: FC<BlogPageProps> = (props) => {
   const title = matter(props.blogStringData).data.title
   return (
-    <React.Fragment>
+    <Fragment>
       <Head>
         <title>{title}</title>
       </Head>
@@ -31,7 +31,7 @@ const BlogPage: FC<BlogPageProps> = (props) => {
       <MyLayout>
         <BlogContent blogStringData={props.blogStringData} title={props.title} description={props.description} />
       </MyLayout>
-    </React.Fragment>
+    </Fragment>
   )
 }
 

@@ -1,7 +1,7 @@
 import GitHubIcon from '@material-ui/icons/GitHub'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import MailOutlineIcon from '@material-ui/icons/MailOutline'
-import React, { FC } from 'react'
+import { FC } from 'react'
 import MyLayout from '../components/MyLayout'
 import Head from 'next/head'
 

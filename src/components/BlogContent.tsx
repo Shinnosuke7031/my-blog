@@ -1,4 +1,4 @@
-import { Fragment, FC, useEffect } from 'react'
+import { Fragment, FC } from 'react'
 import ReactMarkdown from 'react-markdown'
 import matter from "gray-matter";
 import CodeBlock from '../components/CodeBlock'

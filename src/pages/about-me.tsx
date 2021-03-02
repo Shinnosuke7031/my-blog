@@ -1,5 +1,6 @@
 import { FC, useState } from "react"
 import MyLayout from '../components/MyLayout'
+import Head from 'next/head'
 
 const About: FC<{}> = () => {
   
@@ -26,6 +27,10 @@ const About: FC<{}> = () => {
   
   return(
     <MyLayout>
+      <Head>
+        <title>About Me</title>
+        <meta name="description" content="NOSUKE BLOGを運営してる私について" />
+      </Head>
       <h1 className='title'>私について</h1>
       <ul className='profiles'>
         {items.map((temp, index) => (

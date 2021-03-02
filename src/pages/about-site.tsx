@@ -1,5 +1,6 @@
 import { FC } from "react"
 import MyLayout from '../components/MyLayout'
+import Head from 'next/head'
 
 const SiteDetailInfoes: FC<{}> = () => {
 
@@ -69,9 +70,12 @@ const SiteDetailInfoes: FC<{}> = () => {
 
   return (
     <MyLayout>
+      <Head>
+        <title>About Site</title>
+        <meta name="description" content="NOSUKE BLOGについて" />
+      </Head>
       <h1 className={'title'}>About Site</h1>
-      <p>最初は、Reactを勉強し始めてから10日で制作したため、ディレクトリ構成やルーティングのことを全く考えていませんでした。</p>
-      <p>そのため、別のアウトプットで新しいことを学んだら、リファクタリングを行い、技術力を高めていきます。</p>
+      <p>SSG（静的サイト生成）をNext.jsで実現してます。</p>
       {SiteDetail}
       <style jsx>{`
         .title {

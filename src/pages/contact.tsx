@@ -11,7 +11,7 @@ const ContactInfoes: FC<{}> = () => {
     <MyLayout>
       <Head>
         <title>Contact</title>
-        <meta name="description" content="NOSUKE BLOGを運営してる私について" />
+        <meta name="description" content="連絡先" />
       </Head>
       <h1 className={'title'}>Contact</h1>
       <div className={'contact'}>

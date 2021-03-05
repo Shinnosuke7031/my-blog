@@ -141,7 +141,7 @@ curl http://localhost:8080/api/item/10
 これで完成ですね！
 
 # まとめ
-前回使った[Scala + Akka HTTP編](https://zenn.dev/nosuke_shin/articles/a4742aaeb45ca2)と比較すると、非常に簡単にAPIを作ることができました。
+前回使った[Scala + Akka HTTP編](https://nosuke-blog.site/blog/scala-akka-easy-api)と比較すると、非常に簡単にAPIを作ることができました。
 
 やはり、
 - Scala : Javaを進化させた言語

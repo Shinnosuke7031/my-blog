@@ -1,6 +1,7 @@
 import { FC, useState } from "react"
 import MyLayout from '../components/MyLayout'
 import Head from 'next/head'
+import Paper from "@material-ui/core/Paper"
 
 const About: FC<{}> = () => {
   
@@ -20,8 +21,8 @@ const About: FC<{}> = () => {
 
   const detail_info = (
     <div>
-      <h1> {detail.title} </h1>
-      <p> {detail.text} </p>
+      <h1 style={{textAlign: 'center'}}> {detail.title} </h1>
+      <p style={{padding: '10px'}}> {detail.text} </p>
     </div>
   )
   
@@ -31,25 +32,31 @@ const About: FC<{}> = () => {
         <title>About Me</title>
         <meta name="description" content="NOSUKE BLOGを運営してる私について" />
       </Head>
-      <h1 className='title'>私について</h1>
-      <ul className='profiles'>
-        {items.map((temp, index) => (
-          index!==0 ?
-          <li key={index} className='profiles_content' onMouseEnter={()=>handleOnMouseEnter(temp.title, temp.text)}>
-            <p>{temp.title}</p>
-          </li> : 
-          <li key={index} className='profiles_content_last' onMouseEnter={()=>handleOnMouseEnter(temp.title, temp.text)}>
-            <p>{temp.title}</p>
-          </li>
-        ))
+      <Paper elevation={10}>
+        <h1 className='title'>私について</h1>
+        <ul className='profiles'>
+          {items.map((temp, index) => (
+            index!==0 ?
+            <li key={index} className='profiles_content' onMouseEnter={()=>handleOnMouseEnter(temp.title, temp.text)}>
+              <p>{temp.title}</p>
+            </li> : 
+            <li key={index} className='profiles_content_last' onMouseEnter={()=>handleOnMouseEnter(temp.title, temp.text)}>
+              <p>{temp.title}</p>
+            </li>
+          ))
         }
-      </ul>
-      
-      <hr></hr>
-      {detail_info}
-      <hr></hr>
+        </ul>
+
+        <hr></hr>
+        {detail_info}
+        <br />
+      </Paper>
 
       <style jsx>{`
+        .title {
+          width: fit-content;
+          margin: 0 auto;
+        }
         .profiles {
           list-style: none;
           margin: 0 auto;
@@ -68,7 +75,6 @@ const About: FC<{}> = () => {
           align-items: center;
           border: 1px solid black;
           border-radius: 5px;
-          cursor: pointer;
           transition: 0.5s;
         }
         .profiles_content_last {
@@ -80,12 +86,11 @@ const About: FC<{}> = () => {
           align-items: center;
           border: 1px solid black;
           border-radius: 5px;
-          cursor: pointer;
           transition: 0.5s;
         }
         .profiles li:hover {
           transition: 0.5s;
-          background-color: #c782d8;
+          background-color: #82c4d8;
         }  
       `}</style>
     </MyLayout>   

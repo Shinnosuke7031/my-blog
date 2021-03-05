@@ -26,7 +26,7 @@ const CodeBlock: FC<P> = ({ language, value }) => {
           color: #ffffff;
           border-bottom: #ffffff 1px solid;
           background-color: #2b2b2b;
-          z-index: 999999;
+          z-index: 99;
         }
       `}</style>
     </Fragment>

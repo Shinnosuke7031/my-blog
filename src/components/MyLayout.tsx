@@ -1,17 +1,34 @@
 import {FC, ReactNode} from 'react'
-import Footer from './Footer'
-import Header from './Header'
+import Footer from './layout/Footer'
+import Header from './layout/Header'
 import { useMediaQuery } from "react-responsive"
 
 const MyLayout: FC<ReactNode> = (props) => {
+  const isPCScreen = useMediaQuery({ query: '(min-width: 1100px)'})
+  const isTabletScreen = useMediaQuery({ query: '(min-width: 701px) and (max-width: 1099px)'})
   const isMobileScreen = useMediaQuery({ query: '(max-width: 700px)'})
   return (
     <div className="container">
       <Header />
       <div className="main">
-        <div className={isMobileScreen ? "box-mob" : "box"}>
+        {isPCScreen &&
+        <div className="box-pc">
           {props.children}
         </div>
+        }
+        {isTabletScreen &&
+        <div className="box-tab">
+          {props.children}
+        </div>
+        }
+        {isMobileScreen &&
+        <div className="box-mob">
+          {props.children}
+        </div>
+        }
+        {/* <div className={isMobileScreen ? "box-mob" : "box"}>
+          {props.children}
+        </div> */}
       </div>
       <Footer />
 
@@ -26,7 +43,7 @@ const MyLayout: FC<ReactNode> = (props) => {
           flex-direction: column;
           width: 100vw;
           height: 100%;
-          background-color: #EEEEEE;
+          background-color: #d9e9f3;
         }
         .box {
           padding: 10px;
@@ -34,11 +51,23 @@ const MyLayout: FC<ReactNode> = (props) => {
           height: 100%;
           width: 700px;
         }
+        .box-pc {
+          padding: 10px;
+          margin: 20px auto;
+          height: 100%;
+          width: 1100px;
+        }
         .box-mob {
           padding: 10px;
           margin: 20px auto;
           height: 100%;
           width: 100%;
+        }
+        .box-tab {
+          padding: 10px;
+          margin: 20px auto;
+          height: 100%;
+          width: 700px;
         }
         .nav {
           position: relative;

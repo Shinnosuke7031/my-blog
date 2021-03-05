@@ -1,6 +1,7 @@
 import GitHubIcon from '@material-ui/icons/GitHub'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import MailOutlineIcon from '@material-ui/icons/MailOutline'
+import Paper from "@material-ui/core/Paper"
 import { FC } from 'react'
 import MyLayout from '../components/MyLayout'
 import Head from 'next/head'
@@ -13,19 +14,23 @@ const ContactInfoes: FC<{}> = () => {
         <title>Contact</title>
         <meta name="description" content="連絡先" />
       </Head>
-      <h1 className={'title'}>Contact</h1>
-      <div className={'contact'}>
+      <Paper elevation={10}>
+        <h1 className={'title'}>Contact</h1>
+        <div className={'contact'}>
 
-        <div className={'mail'}>
-          <MailOutlineIcon style={{color: "grey"}} fontSize='large' />
-          <a className={`${'show_line_from_left'} ${'change_color_from_left'}`} href="mailto:8120505@ed.tus.ac.jp">8120505@ed.tus.ac.jp</a>
+          <div className={'mail'}>
+            <MailOutlineIcon style={{color: "grey"}} fontSize='large' />
+            <a className={`${'show_line_from_left'} ${'change_color_from_left'}`} href="mailto:8120505@ed.tus.ac.jp">8120505@ed.tus.ac.jp</a>
+          </div>
+          <hr/>
+          <div>
+            <a href="https://github.com/Shinnosuke7031"><GitHubIcon style={{color: "#000000"}} fontSize='large' /> </a>
+            <a href="https://twitter.com/web7031boushi"><TwitterIcon fontSize='large' /> </a>
+          </div>
         </div>
-        <hr/>
-        <div>
-          <a href="https://github.com/Shinnosuke7031"><GitHubIcon style={{color: "#000000"}} fontSize='large' /> </a>
-          <a href="https://twitter.com/web7031boushi"><TwitterIcon fontSize='large' /> </a>
-        </div>
-      </div>
+        <br />
+        <br />
+      </Paper>
       <style jsx>{`
         .title {
           font-size: 40px;
@@ -43,10 +48,14 @@ const ContactInfoes: FC<{}> = () => {
           padding: 20px 30px;
           border-radius: 5px;
         }
+        @media screen and (max-width: 500px) {
+                            .contact {
+                              width: 100%;
+                            }
+                          }
 
         .contact a {
           text-decoration: none;
-          color: black;
           margin-left: 20px;
           cursor: pointer;
         }

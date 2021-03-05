@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme: Theme) =>
       position: 'relative',
       overflow: 'auto',
       maxHeight: 375,
+      margin: '0 auto'
     },
     root_mob: {
       width: '100%',

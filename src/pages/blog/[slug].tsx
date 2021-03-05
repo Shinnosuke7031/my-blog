@@ -3,8 +3,11 @@ import { GetStaticProps } from "next"
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import MyLayout from '../../components/MyLayout'
+import ProfileCard from '../../components/ProfileCard'
+import BlogIndex from '../../components/blog/BlogIndex'
 import fs from 'fs'
 import matter from "gray-matter"
+import { useMediaQuery } from "react-responsive"
 import styles from '../../styles/animation.module.css'
 
 const DynamicBlogContent = dynamic(
@@ -17,7 +20,8 @@ type typeBlogDataArray = {
   title: string
   description: string
   date: string
-  tag: string | string[]
+  imgpath: string
+  tag: string[]
 }
 
 type BlogPageProps = {
@@ -29,6 +33,7 @@ type BlogPageProps = {
 const BlogPage: FC<BlogPageProps> = (props) => {
   const title = matter(props.blogStringData).data.title
   const description = matter(props.blogStringData).data.description
+  const isPCScreen = useMediaQuery({ query: '(min-width: 1100px)'})
   return (
     <Fragment>
       <Head>
@@ -38,8 +43,35 @@ const BlogPage: FC<BlogPageProps> = (props) => {
 
       <MyLayout>
         {/* <BlogContent blogStringData={props.blogStringData} title={props.title} description={props.description} /> */}
-        <DynamicBlogContent blogStringData={props.blogStringData} />
+        <div className='container'>
+          <div className={isPCScreen ? 'content' : 'content-mob'}>
+            <DynamicBlogContent blogStringData={props.blogStringData} />
+          </div>
+          {isPCScreen && <div className='others'>
+            <ProfileCard />
+            <br />
+            <br />
+            <br />
+            <br />
+            <BlogIndex blogStringData={props.blogStringData} /> 
+          </div>}
+        </div>
       </MyLayout>
+      <style jsx>{`
+        .container {
+          display: flex;
+          justify-content: space-around;
+        }
+        .content {
+          width: 700px;
+        }
+        .content-mob {
+          width: 100%;
+        }
+        .others {
+          width: 300px;
+        }
+      `}</style>
     </Fragment>
   )
 }

@@ -1,6 +1,7 @@
 import { FC } from "react"
-import MyLayout from '../components/MyLayout'
 import Head from 'next/head'
+import MyLayout from '../components/MyLayout'
+import Paper from "@material-ui/core/Paper"
 
 const SiteDetailInfoes: FC<{}> = () => {
 
@@ -24,12 +25,22 @@ const SiteDetailInfoes: FC<{}> = () => {
                             display: flex;
                             flex-direction: row;
                             padding: 0;
+                            margin: 0 auto;
+                            width: fit-content;
                           }
-
                           .skill {
                             padding: 0;
                             margin: 0 10px;
                             opacity: 1;
+                            width: fit-content;
+                          }
+                          @media screen and (max-width: 1100px) {
+                            .skills {
+                              flex-direction: column;
+                            }
+                            .skill {
+                              margin: 0 auto;
+                            }
                           }
 
                           .fade {
@@ -74,9 +85,17 @@ const SiteDetailInfoes: FC<{}> = () => {
         <title>About Site</title>
         <meta name="description" content="NOSUKE BLOGについて" />
       </Head>
-      <h1 className={'title'}>About Site</h1>
-      <p>SSG（静的サイト生成）をNext.jsで実現してます。</p>
-      {SiteDetail}
+      <Paper elevation={10}>
+        <h1 className={'title'}>About Site</h1>
+        <div className='text'>
+          <p>SSG（静的サイト生成）をNext.jsで実現してます。</p>
+          <p>当ブログは、WEBやプログラミングについて学んだことの備忘録です。</p>
+          <p>また、それ以外にも日常的なことや趣味についても書いてます。</p>
+        </div>
+        {SiteDetail}
+        <br />
+        <br />
+      </Paper>
       <style jsx>{`
         .title {
           font-size: 40px;
@@ -85,6 +104,10 @@ const SiteDetailInfoes: FC<{}> = () => {
           justify-content: center;
           align-items: center;
           padding: 50px 0;
+        }
+        .text {
+          margin: 0 auto;
+          width: fit-content;
         }
       `}</style>
     </MyLayout>

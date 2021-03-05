@@ -3,6 +3,7 @@ slug: kotlin-springboot-easy-api
 title: (Kotlin + Spring Boot編)バックエンド初心者が簡単なAPIを作って学ぶ
 description: バックエンド初心者がKotlin + Spring Bootで簡単なAPIを作ったので、その記録をまとめました。
 date: 2021/2/27
+imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fkotlin-1.svg?alt=media&token=7e9ce6de-dbd8-4c6f-8ba9-1a34d3d810cb
 type: tech
 tag: 
 - Kotlin
@@ -61,18 +62,13 @@ class DemoController(private val demoRepository: DemoRepository) {
 
 `application.properties`にMySQLと接続する設定を書いていきます。
 ```:application.properties
-## Spring DATASOURCE (DataSourceAutoConfiguration & DataSourceProperties)
 spring.datasource.url = jdbc:mysql://localhost:13306/root?useSSL=false
 spring.datasource.username = root
 spring.datasource.password = root
 spring.datasource.driver-class-name = com.mysql.cj.jdbc.Driver
 
-## Hibernate Properties
-
-# The SQL dialect makes Hibernate generate better SQL for the chosen database
 spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
 
-# Hibernate ddl auto (create, create-drop, validate, update)
 spring.jpa.hibernate.ddl-auto = update
 ```
 

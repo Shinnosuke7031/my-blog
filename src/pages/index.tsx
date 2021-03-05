@@ -39,11 +39,16 @@ const Home: FC<StaticProps> = (props) => {
           <p>当ブログは、WEBやプログラミングについて学んだことの備忘録です。</p>
           <p>また、それ以外にも日常的なことや趣味についても書いてます。</p>
         </div>
-        <h1>Lineup</h1>
-        <DynamicNewArrivalsList blogData={blogData} />
+        <div style={{width: 'fit-content', margin: '0 auto'}}>
+          <h1>Recent Articles</h1>
+          <DynamicNewArrivalsList blogData={blogData} />
+        </div>
       </MyLayout>
       <style jsx>{`
         h1 {
+          width: fit-content;
+          position: relative;
+          left: 11.5rem;
           margin-bottom: -0.2rem;
         }
         .welcome {
@@ -54,6 +59,11 @@ const Home: FC<StaticProps> = (props) => {
           background-color: #ffffff;
           border-radius: 0.4rem;
           box-shadow: 3px 3px 3px 3px #000000;
+        }
+        @media screen and (min-width: 1100px) {
+          .welcome {
+            width: 600px;
+          }
         }
       `}</style>
     </Fragment>
@@ -98,7 +108,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
   return {
     props: {
-      blogData: blogDataString,
+      blogData: blogDataString.slice(1, 6),
       title: siteData.default.title,
       description: siteData.default.description,
     },

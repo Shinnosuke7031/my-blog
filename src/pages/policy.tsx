@@ -1,9 +1,14 @@
 import { Paper } from "@material-ui/core";
 import { FC } from "react";
 import MyLayout from "../components/MyLayout";
+import Head from 'next/head'
 
 const Policy: FC<{}> = () => (
   <MyLayout>
+      <Head>
+        <title>プライバシーポリシー</title>
+        <meta name="description" content="プライバシーポリシー" />
+      </Head>
     <Paper elevation={10}>
       <p>制定日2021/03/06</p>
       <h1>プライバシーポリシー</h1>

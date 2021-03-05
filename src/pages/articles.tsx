@@ -18,6 +18,7 @@ import fs from 'fs'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import matter from 'gray-matter'
+import Head from 'next/head'
 
 const useStyles1 = makeStyles((theme: Theme) =>
   createStyles({
@@ -132,6 +133,10 @@ const Articles: FC<Props> = (props) => {
 
   return (
     <Fragment>
+      <Head>
+        <title>Articles</title>
+        <meta name="description" content="NOSUKE BLOGの記事一覧です" />
+      </Head>
       <MyLayout>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="custom pagination table">

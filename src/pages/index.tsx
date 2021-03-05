@@ -41,7 +41,6 @@ const Home: FC<StaticProps> = (props) => {
         h1 {
           width: fit-content;
           position: relative;
-          left: 11.5rem;
           margin-bottom: -0.2rem;
         }
         .welcome {

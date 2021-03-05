@@ -1,19 +1,12 @@
 import { Fragment, FC } from 'react'
 import Head from 'next/head'
-import dynamic from 'next/dynamic'
 import MyLayout from '../components/MyLayout'
 import NavOfSiteAndContactMe from '../components/NavOfSiteAndContactMe'
 import NavOfTwitterAndGithub from '../components/NavOfTwitterAndGithub'
+import NewArrivalsList from '../components/NewArrivalsList'
 import fs from 'fs'
 import { GetStaticProps } from 'next'
 import matter from 'gray-matter'
-import styles from '../styles/animation.module.css'
-
-const DynamicNewArrivalsList = dynamic(
-  () => import('../components/NewArrivalsList'),
-  { loading: () => <div className={styles.loader}></div> }
-)
-
 
 type StaticProps = {
   blogData: string[]
@@ -41,7 +34,7 @@ const Home: FC<StaticProps> = (props) => {
         </div>
         <div style={{width: 'fit-content', margin: '0 auto'}}>
           <h1>Recent Articles</h1>
-          <DynamicNewArrivalsList blogData={blogData} />
+          <NewArrivalsList blogData={blogData} />
         </div>
       </MyLayout>
       <style jsx>{`

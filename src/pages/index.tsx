@@ -64,8 +64,8 @@ const Home: FC<StaticProps> = (props) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const siteData = await import(`../../config.json`);
-  const files = fs.readdirSync(process.cwd() + '/docs', 'utf8')
 
+  const files = fs.readdirSync(process.cwd() + '/docs', 'utf8')
   const blogs = files.filter((fn) => fn.endsWith(".md"))
 
   const blogDataString = blogs.map((blog) => {
@@ -100,7 +100,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
   return {
     props: {
-      blogData: blogDataString.slice(1, 6),
+      blogData: blogDataString.slice(0, 5),
       title: siteData.default.title,
       description: siteData.default.description,
     },

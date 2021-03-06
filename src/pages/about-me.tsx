@@ -91,7 +91,12 @@ const About: FC<{}> = () => {
         .profiles li:hover {
           transition: 0.5s;
           background-color: #82c4d8;
-        }  
+        }
+        @media screen and (max-width: 520px) {
+          .profiles {
+            width: 200px;
+          }
+        }
       `}</style>
     </MyLayout>   
   )

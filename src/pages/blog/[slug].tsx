@@ -31,14 +31,21 @@ type BlogPageProps = {
 }
 
 const BlogPage: FC<BlogPageProps> = (props) => {
-  const title = matter(props.blogStringData).data.title
-  const description = matter(props.blogStringData).data.description
+  const matteredData = matter(props.blogStringData).data
+  const title = matteredData.title
+  const description = matteredData.description
   const isPCScreen = useMediaQuery({ query: '(min-width: 1100px)'})
   return (
     <Fragment>
       <Head>
         <title>{title}</title>
         <meta name="description" content={description} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@tyamatyatya" />
+        <meta property="og:url" content={`https://nosuke-blog.site/blog/${matteredData.slug}`} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} /> 
+        <meta property="og:image" content={matteredData.imgpath} />
       </Head>
 
       <MyLayout>

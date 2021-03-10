@@ -6,9 +6,8 @@ date: 2021/3/10
 imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Ficonfinder_markdown_298823.png?alt=media&token=14cc8363-dd94-4dc4-885a-a90595e24f9a
 type: tect
 tag: 
-- react-syntax-highlighter
-- react-markdown
-- gray-matter
+- React
+- Markdown
 ---
 
 # はじめに

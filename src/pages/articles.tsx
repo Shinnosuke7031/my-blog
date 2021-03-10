@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useCallback, useMemo } from 'react';
+import React, { FC, Fragment } from 'react';
 import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -155,8 +155,8 @@ const Articles: FC<Props> = (props) => {
                   </TableCell>
                   <TableCell style={{ width: 160 }} align="right">
                     {row.tag.map((tag, index) => index === row.tag.length - 1 ? 
-                    <span key={index}>{tag}</span>:
-                    <span key={index}>{tag}&nbsp;&nbsp;</span>
+                    <span className="tag" key={index}>{tag}</span>:
+                    <span className="tag" style={{margin: '0 0.5rem 0 0'}} key={index}>{tag}</span>
                     )}
                   </TableCell>
                   <TableCell style={{ width: 100 }} align="right">
@@ -192,6 +192,14 @@ const Articles: FC<Props> = (props) => {
           </Table>
         </TableContainer>
       </MyLayout>
+      <style jsx>{`
+        .tag {
+          border-radius: 0.3rem;
+          color: #ffffff;
+          background-color: #0051ff;
+          padding: 0 0.3rem;
+        }
+      `}</style>
     </Fragment>
   );
 }

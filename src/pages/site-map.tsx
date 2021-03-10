@@ -2,6 +2,7 @@ import { Paper } from "@material-ui/core"
 import { FC } from "react"
 import MyLayout from "../components/MyLayout"
 import Link from 'next/link'
+import Head from 'next/head'
 
 const links = [
   {name: 'トップページ', path: '/'},
@@ -15,6 +16,10 @@ const links = [
 const SiteMap: FC<{}> = () => {
   return (
     <MyLayout>
+      <Head>
+        <title>Site Map</title>
+        <meta name="description" content="NOSUKE BLOGのサイトマップです" />
+      </Head>
       <Paper elevation={10}>
         <br/>
         <br/>

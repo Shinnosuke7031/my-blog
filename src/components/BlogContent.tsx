@@ -20,7 +20,7 @@ const BlogContent: FC<BlogContentProps> = (props) => {
       <Paper elevation={3} style={{padding: '1rem',}}>
         <h1>{data.title}</h1>
         <p className='date'>{data.date}</p>
-        <div className='blog'>{/* 記事内のpタグの行間を大きくする */}
+        <div className='blog'>
           <ReactMarkdown renderers={{code: CodeBlock, image: MarkdownImg, heading: Heading}}>{content}</ReactMarkdown>
         </div>
       </Paper>

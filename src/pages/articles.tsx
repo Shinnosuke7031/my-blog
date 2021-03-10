@@ -19,6 +19,13 @@ import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import matter from 'gray-matter'
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
+import styles from '../styles/animation.module.css'
+
+const DynamicSerachBlog = dynamic(
+  () => import('../components/blog/SearchBlog'),
+  { loading: () => <div className={styles.loader}></div> }
+)
 
 const useStyles1 = makeStyles((theme: Theme) =>
   createStyles({
@@ -138,6 +145,10 @@ const Articles: FC<Props> = (props) => {
         <meta name="description" content="NOSUKE BLOGの記事一覧です" />
       </Head>
       <MyLayout>
+        <Paper elevation={10} style={{padding: '1rem'}}>
+          <DynamicSerachBlog isTagDisplayed={true} blogMetaData={rowsData} />
+        </Paper>
+        <br/>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="custom pagination table">
             <TableBody>

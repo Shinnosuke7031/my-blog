@@ -9,9 +9,15 @@ import fs from 'fs'
 import matter from "gray-matter"
 import { useMediaQuery } from "react-responsive"
 import styles from '../../styles/animation.module.css'
+import Paper from '@material-ui/core/Paper'
 
 const DynamicBlogContent = dynamic(
   () => import('../../components/BlogContent'),
+  { loading: () => <div className={styles.loader}></div> }
+)
+
+const DynamicSerachBlog = dynamic(
+  () => import('../../components/blog/SearchBlog'),
   { loading: () => <div className={styles.loader}></div> }
 )
 
@@ -28,6 +34,7 @@ type BlogPageProps = {
   blogStringData: string
   title: string
   description: string
+  allStringData: string[]
 }
 
 const BlogPage: FC<BlogPageProps> = (props) => {
@@ -35,6 +42,15 @@ const BlogPage: FC<BlogPageProps> = (props) => {
   const title = matteredData.title
   const description = matteredData.description
   const isPCScreen = useMediaQuery({ query: '(min-width: 1100px)'})
+  const metaData = props.allStringData.map(el => matter(el)).map(data => ({
+    slug: data.data.slug,
+    title: data.data.title,
+    description: data.data.description,
+    date: data.data.date,
+    type: data.data.type,
+    tag: data.data.tag,
+    imgpath: data.data.imgpath
+  }))
   return (
     <Fragment>
       <Head>
@@ -55,6 +71,13 @@ const BlogPage: FC<BlogPageProps> = (props) => {
             <DynamicBlogContent blogStringData={props.blogStringData} />
           </div>
           {isPCScreen && <div className='others'>
+            <Paper elevation={10} style={{padding: '1rem'}}>
+              <DynamicSerachBlog isTagDisplayed={false} blogMetaData={metaData} />
+            </Paper>
+            <br />
+            <br />
+            <br />
+            <br />
             <ProfileCard />
             <br />
             <br />
@@ -105,13 +128,22 @@ export async function getStaticPaths() {
 export const getStaticProps: GetStaticProps = async ({params}) => {
   const file = fs.readFileSync(`${process.cwd()}/docs/${params.slug}.md`, 'utf8')
   const siteData = await import(`../../../config.json`);
-  
+  const allFiles = fs.readdirSync(process.cwd() + '/docs', 'utf8')
+  const blogs = allFiles.filter((fn) => fn.endsWith(".md"))
+  const blogStringDataArr = blogs.map((blog) => {
+    const path = `${process.cwd()}/docs/${blog}`
+    const data = fs.readFileSync(path, {
+      encoding: "utf-8",
+    })
+    return data
+  })
 
   return {
     props : {
       blogStringData: file,
       title: siteData.default.title,
       description: siteData.default.description,
+      allStringData: blogStringDataArr
     }
   }
 

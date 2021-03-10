@@ -11,7 +11,7 @@ const Header: FC = () => {
   const pathname = router.pathname
   const isPCScreen = useMediaQuery({ query: '(min-width: 700px)'})
   const isMobileScreen = useMediaQuery({ query: '(max-width: 699px)'})
-  
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => (
@@ -41,14 +41,15 @@ const Header: FC = () => {
             <Link href="/about-site">{pathname === '/about-site' ? <p className='hoverd-underline'><span>About This Site</span></p> : <p className='hoverd-underline'>About This Site</p>}</Link>
             <Link href="/contact">{pathname === '/contact' ? <p className='hoverd-underline'><span>Contact</span></p> : <p className='hoverd-underline'>Contact</p>}</Link>
           </div>}
-          {isMobileScreen && <div>
+          {isMobileScreen && 
+          <Fragment>
             <div className='menu-icon'>
               <MenuIcon onClick={toggleDrawer(true)} style={{cursor: 'pointer'}} fontSize='large' />
             </div>
             <Drawer anchor='right' open={isOpen} onClose={toggleDrawer(false)}>
               <HeaderMenu />
             </Drawer>
-          </div>
+          </Fragment>
           }
         </div>
       }

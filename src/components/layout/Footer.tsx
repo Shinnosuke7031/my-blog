@@ -32,7 +32,7 @@ const Footer: FC = () => {
         {!isMobileVerticallyScreen && <p className='separation'>&#124;</p>}
         <p><Link href='/contact'><a>お問い合わせ</a></Link></p>
         {!isMobileVerticallyScreen && <p className='separation'>&#124;</p>}
-        <p><a href='https://nosuke-blog.site/sitemap.xml'>サイトマップ</a></p>
+        <p><Link href='/site-map'><a>サイトマップ</a></Link></p>
         {!isMobileVerticallyScreen && <p className='separation'>&#124;</p>}
         <p><Link href='/policy'><a>プライバシーポリシー</a></Link></p>
       </div>

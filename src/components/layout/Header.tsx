@@ -9,9 +9,9 @@ import HeaderMenu from '../layout/HeaderMenu'
 const Header: FC = () => {
   const router = useRouter()
   const pathname = router.pathname
-  const isPCScreen = useMediaQuery({ query: '(min-width: 1100px)'})
-  const isMobileScreen = useMediaQuery({ query: '(max-width: 700px)'})
-
+  const isPCScreen = useMediaQuery({ query: '(min-width: 700px)'})
+  const isMobileScreen = useMediaQuery({ query: '(max-width: 699px)'})
+  
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => (
@@ -34,21 +34,21 @@ const Header: FC = () => {
       {pathname === '/' ? <h1 className='toppage' style={{cursor: 'default'}}>NOSUKE BLOG</h1> :
         <div className='container3'>
           <div className='header-title'> <Link href="/"><h1 className='hoverd-underline'>NOSUKE BLOG</h1></Link> </div>
-          {isPCScreen ? 
+          {isPCScreen && 
           <div className='links'>
             <Link href="/articles">{pathname === '/articles' || pathname === '/blog/[slug]' ? <p className='hoverd-underline'><span>Articles</span></p> : <p className='hoverd-underline'>Articles</p>}</Link>
             <Link href="/about-me">{pathname === '/about-me' ? <p className='hoverd-underline'><span>Profile</span></p> : <p className='hoverd-underline'>Profile</p>}</Link>
             <Link href="/about-site">{pathname === '/about-site' ? <p className='hoverd-underline'><span>About This Site</span></p> : <p className='hoverd-underline'>About This Site</p>}</Link>
             <Link href="/contact">{pathname === '/contact' ? <p className='hoverd-underline'><span>Contact</span></p> : <p className='hoverd-underline'>Contact</p>}</Link>
-          </div> :
-          <Fragment>
+          </div>}
+          {isMobileScreen && <div>
             <div className='menu-icon'>
               <MenuIcon onClick={toggleDrawer(true)} style={{cursor: 'pointer'}} fontSize='large' />
             </div>
             <Drawer anchor='right' open={isOpen} onClose={toggleDrawer(false)}>
               <HeaderMenu />
             </Drawer>
-          </Fragment>
+          </div>
           }
         </div>
       }

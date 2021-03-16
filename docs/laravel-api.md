@@ -2,7 +2,7 @@
 slug: laravel-api
 title: Laravelで(CORS対策付き)APIを簡単に作る方法
 description: 現在のWEB開発では、フロントエンドとバックエンドを分離した考え方が主流になってきています。そのほうが、それぞれのロジックが混在せずに効率よく開発ができるからです。フロントエンドはAPIから情報を取得して、表示処理はJavaScript(React, Vueなど)で行います。PHPのフレームワークとして代表的なLaravelでは、APIを簡単に作成できます。今回は、その方法をまとめました。
-date: 2021/3/11
+date: 2021/3/16
 imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fnextjs-3.svg?alt=media&token=2caf9210-05c4-46e3-87c3-c369ab5c0db0
 type: tect
 tag: 

@@ -25,3 +25,10 @@ a {
 .blog p {
   line-height: 200%;
 }
+
+code {
+  font-family: Consolas, Monaco, "Andale Mono", monospace;
+  padding: 0 0.5rem;
+  color: #ffffff;
+  background-color: rgb(43, 43, 43);
+}

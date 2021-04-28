@@ -11,6 +11,10 @@ import { useMediaQuery } from "react-responsive"
 import styles from '../../styles/animation.module.css'
 import Paper from '@material-ui/core/Paper'
 
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+
 const DynamicBlogContent = dynamic(
   () => import('../../components/BlogContent'),
   { loading: () => <div className={styles.loader}></div> }
@@ -51,6 +55,15 @@ const BlogPage: FC<BlogPageProps> = (props) => {
     tag: data.data.tag,
     imgpath: data.data.imgpath
   }))
+  const settings = {
+    infinite: true,
+    speed: 1000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    arrows: false,
+  };
   return (
     <Fragment>
       <Head>
@@ -68,6 +81,23 @@ const BlogPage: FC<BlogPageProps> = (props) => {
         {/* <BlogContent blogStringData={props.blogStringData} title={props.title} description={props.description} /> */}
         <div className='container'>
           <div className={isPCScreen ? 'content' : 'content-mob'}>
+            <div className="top_ad" style={{position: 'sticky', top: '80px'}}>
+              <Slider {...settings} className="slick">
+                <div>
+                  <a href="https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+6GZCI" rel="nofollow">フロントエンドエンジニアになりたい人の Webプログラミング入門</a>
+                  <img width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=3HA5YE+1FSQEQ+3L4M+6GZCI" alt="" />
+                </div>
+                <div>
+                  <a href="https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+601S2" rel="nofollow">【Web開発初心者向け！】Web開発入門完全攻略　充実の18時間コース</a>
+                  <img width="1" height="1" src="https://www15.a8.net/0.gif?a8mat=3HA5YE+1FSQEQ+3L4M+601S2" alt="" />
+                </div>
+                <div>
+                  <a href="https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+609HU" rel="nofollow">オンラインで学ぶWebデザイン講座</a>
+                  <img width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=3HA5YE+1FSQEQ+3L4M+609HU" alt="" />
+                </div>
+              </Slider>
+            </div>
+            <br />
             <DynamicBlogContent blogStringData={props.blogStringData} />
             <br />
             <br />
@@ -99,6 +129,13 @@ const BlogPage: FC<BlogPageProps> = (props) => {
         </div>
       </MyLayout>
       <style jsx>{`
+        .top_ad {
+          width: 100%;
+          background-color: #fff;
+          border-bottom: #000 1px solid;
+          border-radius: 2px;
+          box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+        }
         .banner-ad {
           width: 700px;
           margin: 0 auto;

@@ -107,6 +107,7 @@ const About: FC<{}> = () => {
         <h1 className='title'>私について</h1>
         <br />
         <div className="slick_container">
+          {/* <ImgSlider settings={settings} imgs={imgs} /> */}
           <Slider {...settings} className="slick">
             {imgs.map((img, index) =>
               <div key={index} className='slickimg'>

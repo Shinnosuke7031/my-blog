@@ -14,7 +14,8 @@ const BlogIndex: FC<Props> = (props) => {
     }
   })
   return (
-    <Paper style={{position: 'sticky', top: '100px'}} elevation={10}>
+  <div style={{position: 'sticky', top: '100px'}}>
+    <Paper elevation={10}>
       <p className='index-title'>Index</p>
       <ul>
         {headingData.map((data, index) => 
@@ -65,6 +66,12 @@ const BlogIndex: FC<Props> = (props) => {
         }
       `}</style>
     </Paper>
+    <div>
+      <a href="https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+6RHFL" rel="nofollow">
+      <img width="300" height="250" alt="" src="https://www20.a8.net/svt/bgt?aid=210426278087&wid=001&eno=01&mid=s00000016735001136000&mc=1"/></a>
+      <img width="1" height="1" src="https://www14.a8.net/0.gif?a8mat=3HA5YE+1FSQEQ+3L4M+6RHFL" alt=""/>
+    </div>
+  </div>
   )
 }
 

@@ -57,7 +57,7 @@ type: tect
 tag: 
 - hoge
 ---
-    # ここから下が本文
+    // ここから下が本文 //
 
     ```javascript:hoge.js
     console.log('hogehoge')

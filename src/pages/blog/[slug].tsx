@@ -131,10 +131,15 @@ const BlogPage: FC<BlogPageProps> = (props) => {
       <style jsx>{`
         .top_ad {
           width: 100%;
-          background-color: #fff;
-          border-bottom: #000 1px solid;
+          background-color: #ffffff;
+          border-top: rgb(153, 153, 153) 1px solid;
+          border-bottom: rgb(153, 153, 153) 1.5px solid;
           border-radius: 2px;
           box-shadow: 0px 3px 3px -2px rgb(0 0 0 / 20%), 0px 3px 4px 0px rgb(0 0 0 / 14%), 0px 1px 8px 0px rgb(0 0 0 / 12%);
+        }
+        .top_ad div a {
+          display: inline-block;
+          width: 100%;
         }
         .banner-ad {
           width: 700px;

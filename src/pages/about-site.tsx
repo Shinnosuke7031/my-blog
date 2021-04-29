@@ -117,6 +117,7 @@ const SiteDetailInfoes: FC<{}> = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000,
+    arrows: false,
     responsive: [
       {
         breakpoint: 1024,

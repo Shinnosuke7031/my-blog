@@ -1,7 +1,7 @@
 ---
 slug: react-deploy
-title: create-react-projectで作ったReactアプリをVercelにデプロイ
-description: Reactを初めて触る人は、CRA(create-react-project)でプロジェクトを作ると思います。作ったものは、どうせなら公開して世界中の人にみてもらいたいですよね。デプロイの仕方は、色々あるのですが、特にデプロイが簡単なVercelについてまとめました。
+title: create-react-appで作ったReactアプリをVercelにデプロイ
+description: Reactを初めて触る人は、CRA(create-react-app)でプロジェクトを作ると思います。作ったものは、どうせなら公開して世界中の人にみてもらいたいですよね。デプロイの仕方は、色々あるのですが、特にデプロイが簡単なVercelについてまとめました。
 date: 2021/5/2
 imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.svg?alt=media&token=deb078bd-642f-4f12-b2b1-12bc29572368
 type: tect
@@ -11,7 +11,7 @@ tag:
 ---
 
 # 初めに
-Reactを初めて触る人は、CRA(create-react-project)でプロジェクトを作ると思います。
+Reactを初めて触る人は、CRA(create-react-app)でプロジェクトを作ると思います。
 作ったものは、どうせなら公開して世界中の人にみてもらいたいですよね。
 デプロイの仕方は、色々あるのですが、特にデプロイが簡単なVercelについてまとめました。
 
@@ -23,7 +23,7 @@ Reactは、フロントエンド開発において世界中でもっとも利用
 
 そんなReactの環境構築を簡単にできるものがあります。
 
-それがCRA(create-react-project)です。
+それがCRA(create-react-app)です。
 
 
 余計なものも少々インストールされますが、コマンド一発で環境構築できるのは本当にすごいです。

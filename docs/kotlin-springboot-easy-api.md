@@ -57,7 +57,7 @@ class DemoController(private val demoRepository: DemoRepository) {
 # APIの作成
 ## MySQLとの連携
 
-<span style="color: red;"}>MySQLの環境は各自で用意お願いします。</span>
+MySQLの環境は各自で用意お願いします。
 私は、DockerでMySQLのコンテナを立ち上げてます。
 
 `application.properties`にMySQLと接続する設定を書いていきます。

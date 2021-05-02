@@ -28,8 +28,12 @@ a {
 
 code {
   font-family: Consolas, Monaco, "Andale Mono", monospace;
-  padding: 0 0.5rem;
+  /* padding: 0 0.5rem; */
   color: #ffffff;
   background-color: rgb(43, 43, 43);
   word-wrap: break-word;
+}
+
+p code {
+  padding: 0 0.5rem;
 }

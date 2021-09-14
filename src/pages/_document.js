@@ -1,9 +1,7 @@
-import React from 'react';
-import Document, {
-  Html, Main, NextScript, Head
-} from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
-import { existsGaId, GA_ID } from '../libs/gtag'
+import React from "react";
+import Document, { Html, Main, NextScript, Head } from "next/document";
+import { ServerStyleSheets } from "@material-ui/core/styles";
+import { existsGaId, GA_ID } from "../libs/gtag";
 
 export default class MyDocument extends Document {
   render() {
@@ -17,7 +15,10 @@ export default class MyDocument extends Document {
           {/* Google Analytics */}
           {existsGaId && (
             <>
-              <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} />
+              <script
+                async
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              />
               <script
                 dangerouslySetInnerHTML={{
                   __html: `
@@ -31,20 +32,13 @@ export default class MyDocument extends Document {
               />
             </>
           )}
-          <script data-ad-client="ca-pub-1651494766691774" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-          {/* <ins class="adsbygoogle"
-               style={{display: "block", textAlign: "center"}}
-               data-ad-layout="in-article"
-               data-ad-format="fluid"
-               data-ad-client="ca-pub-1651494766691774"
-               data-ad-slot="5843528435" /> */}
-          {/* <script
-          dangerouslySetInnerHTML={{
-            __html: `
-            (adsbygoogle = window.adsbygoogle || []).push({});`,
-          }}
-          /> */}
+          <script
+            async
+            src={
+              "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1651494766691774"
+            }
+            crossOrigin="anonymous"
+          />
         </Head>
         <body>
           <Main />
@@ -94,6 +88,9 @@ MyDocument.getInitialProps = async (ctx) => {
   return {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
-    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
+    styles: [
+      ...React.Children.toArray(initialProps.styles),
+      sheets.getStyleElement(),
+    ],
   };
 };

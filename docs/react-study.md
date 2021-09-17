@@ -3,50 +3,56 @@ slug: react-study
 title: React初心者に進める勉強方法
 description: Reactに触れてから約10ヶ月になりますが、最初の勉強の仕方がわからずに苦労しました。これからReactを勉強しようとしている方向けに、勉強の仕方をまとめましたので、参考にして頂ければ幸いです。
 date: 2021/5/4
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.svg?alt=media&token=deb078bd-642f-4f12-b2b1-12bc29572368
+imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.png?alt=media&token=b0fecf4e-7725-4a80-9b06-dc974f9d1e55
 type: tect
-tag: 
-- React
-- フロントエンド
-- 学習
+tag:
+  - React
+  - フロントエンド
+  - 学習
 ---
 
 # 初めに
-私はReactに触れてから約10ヶ月になりますが、最初の勉強の仕方がわからずに苦労しました。
 
-これからReactを勉強しようとしている方向けに、勉強の仕方をまとめましたので、参考にして頂ければ幸いです。
+私は React に触れてから約 10 ヶ月になりますが、最初の勉強の仕方がわからずに苦労しました。
 
-# JavaScriptの基礎
-いきなりReactを触るの非常に危険です。
+これから React を勉強しようとしている方向けに、勉強の仕方をまとめましたので、参考にして頂ければ幸いです。
 
-なぜなら、Reactの公式チュートリアルやドキュメントでは、JavaScriptの基礎はできているものとして書かれています。
+# JavaScript の基礎
 
-Reactの基礎や便利なHooksは、JavaScriptの基礎がわからないと活用できないので、勉強必須です。
+いきなり React を触るの非常に危険です。
 
-[Udemy](https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+6RHFL)などの学習コンテンツでHTML/CSSと同時にパパッと学べるので、試してみてください
+なぜなら、React の公式チュートリアルやドキュメントでは、JavaScript の基礎はできているものとして書かれています。
+
+React の基礎や便利な Hooks は、JavaScript の基礎がわからないと活用できないので、勉強必須です。
+
+[Udemy](https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+6RHFL)などの学習コンテンツで HTML/CSS と同時にパパッと学べるので、試してみてください
 ！
 
-# React公式チュートリアル
-## チュートリアル
-JavaScriptの基礎が分かったら、[Reactの公式チュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)をやることをおすすめします。
+# React 公式チュートリアル
 
-このチュートリアルでは、**三目並べ**をReactで作っていきます。
+## チュートリアル
+
+JavaScript の基礎が分かったら、[React の公式チュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)をやることをおすすめします。
+
+このチュートリアルでは、**三目並べ**を React で作っていきます。
 
 主に、以下の基礎的な部分を手を動かしながら学べます。
+
 - コンポーネント
-- propsによるデータの渡し方
+- props によるデータの渡し方
 - イミュータブル(不変性)なコードの書き方
 
 実際に形にしていきながら学べるので、進めていくうちに達成感もあります。
 
 ## 関数型コンポーネント
-[Reactの公式チュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)はReactの基礎的なことを学べたと思いますが、クラスでコンポーネント(Class Component)が書かれていたと思います。
+
+[React の公式チュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)は React の基礎的なことを学べたと思いますが、クラスでコンポーネント(Class Component)が書かれていたと思います。
 
 しかし、現在主流なのは、関数で書かれた**関数コンポーネント(FC: Functional Component)**です。
 
-FCは、クラスコンポーネントよりも簡潔なコードになります。
+FC は、クラスコンポーネントよりも簡潔なコードになります。
 
-以下のClass ComponentとFunctional Componentを見比べてみてください。
+以下の Class Component と Functional Component を見比べてみてください。
 
 ```javascript:Class Component
 class Example extends React.Component {
@@ -65,6 +71,7 @@ class Example extends React.Component {
   }
 }
 ```
+
 ```javascript:Functional Component
 function Example() {
   const [count, setCount] = useState(0);
@@ -77,26 +84,30 @@ function Example() {
   );
 }
 ```
+
 非常にシンプルだと思います。ちなみに、`useState`を**Hooks**と言います。
 
-そこで、関数コンポーネントやHooksをマスターするために、[Reactの公式チュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)で作成した三目並べを関数コンポーネントやHooksでリファクタリングしてみることをオススメします。
+そこで、関数コンポーネントや Hooks をマスターするために、[React の公式チュートリアル](https://ja.reactjs.org/tutorial/tutorial.html)で作成した三目並べを関数コンポーネントや Hooks でリファクタリングしてみることをオススメします。
 
-Reactの公式サイトには、関数コンポーネントやHooksについても説明があるので、それをみながらやってみてください！
+React の公式サイトには、関数コンポーネントや Hooks についても説明があるので、それをみながらやってみてください！
 
-これだけじゃ不安な人は、[Udemy](https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+6RHFL)にReactの講座もあるのでやってみるといいかもしれません！！
+これだけじゃ不安な人は、[Udemy](https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+6RHFL)に React の講座もあるのでやってみるといいかもしれません！！
 
 # 応用（その先へ...）
-## Context APIとRedux
-Reactはコンポーネント間でstate(状態)をprops経由でやりとりしていますが、コンポーネントが増えていくにつれてpropsの受け渡しが複雑になっていきます。
 
-stateの管理をしやすくするために**Context API**と呼ばれるHooksや、**Redux**というライブラリがあります。
+## Context API と Redux
 
-基本的には、Context APIは小中規模、Reduxは大規模なプロジェクトで使用されます。
+React はコンポーネント間で state(状態)を props 経由でやりとりしていますが、コンポーネントが増えていくにつれて props の受け渡しが複雑になっていきます。
+
+state の管理をしやすくするために**Context API**と呼ばれる Hooks や、**Redux**というライブラリがあります。
+
+基本的には、Context API は小中規模、Redux は大規模なプロジェクトで使用されます。
 
 これらを使えるようにすることで、開発しやすくなるので、学んで損はありません。
 
 ## TypeScript
-TypeScriptとは、静的型付けしたJavaScriptです。
+
+TypeScript とは、静的型付けした JavaScript です。
 
 ```javascript:
 // JavaScript
@@ -106,24 +117,27 @@ value = "0";// OK
 let value: number = 0;
 value = "0";// エラー
 ```
-大雑把ですが、こんな感じで、通常のJavaScriptの変数にはどんな値も代入できましたが、TypeScriptは`number`と指定したら数値しか代入できなくなります。
 
-これは、VScodeのようなエディタと相性抜群で、コードを書いている段階でエラーの場所が分かったり、候補の補完がより高度なものになります。
+大雑把ですが、こんな感じで、通常の JavaScript の変数にはどんな値も代入できましたが、TypeScript は`number`と指定したら数値しか代入できなくなります。
+
+これは、VScode のようなエディタと相性抜群で、コードを書いている段階でエラーの場所が分かったり、候補の補完がより高度なものになります。
 
 開発効率が急速に上がるので、フロントエンド開発では必須とも言えますので、絶対にマスターしましょう！
 
 ## Next.js
-このブログの開発にも使っているReactのフレームワークである**Next.js**は以下のようなメリットがあります。
 
-- SSG(静的サイト生成)とSSR(サーバーサイドレンダリング)が簡単に扱える
+このブログの開発にも使っている React のフレームワークである**Next.js**は以下のようなメリットがあります。
+
+- SSG(静的サイト生成)と SSR(サーバーサイドレンダリング)が簡単に扱える
 - ルーティングの設定が簡潔になる
-- SEO向上など
+- SEO 向上など
 
 詳細は[こちらの記事](https://nosuke-blog.site/blog/make-next-blog)で触れているので、そちらをみてください。
 
-近年、Next.jsの盛り上がりがすごく、非常に扱いやすいReactフレームワークなので、ぜひ試してみてください。
+近年、Next.js の盛り上がりがすごく、非常に扱いやすい React フレームワークなので、ぜひ試してみてください。
 
 # まとめ
+
 最初は大変かもしれませんが、根気強く楽しみながら学習してみてください！
 
 私は、[Udemy](https://px.a8.net/svt/ejp?a8mat=3HA5YE+1FSQEQ+3L4M+6RHFL)や[Progate](https://prog-8.com/)で最初は勉強しまくりました。

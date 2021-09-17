@@ -3,7 +3,7 @@ slug: react-get-method-library
 title: Reactでデータ取得するおすすめの方法はSWRだ！
 description: Reactで外部APIから情報を取得する方法は、Fetch APIやaxiosが有名ですが、データ取得のためのReact HooksであるSWR(stale-while-revalidate)を紹介します。
 date: 2021/9/17
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.svg?alt=media&token=deb078bd-642f-4f12-b2b1-12bc29572368
+imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.png?alt=media&token=b0fecf4e-7725-4a80-9b06-dc974f9d1e55
 type: tect
 tag:
   - フロントエンド

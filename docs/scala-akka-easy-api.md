@@ -1,40 +1,44 @@
 ---
 slug: scala-akka-easy-api
 title: (Scala + Akka HTTP編)バックエンド初心者が簡単なAPIを作って学ぶ
-description: 色んな言語触ってAPI作ってみたいなーと思い(Go, Kotlin, Django, Flask, Express, ...)、その第1回はScalaで書いてみようと思いました。そこで、ScalaでAPIを作るのに便利なライブラリAkkaがあるとのことなので、これを使っていきます。 
+description: 色んな言語触ってAPI作ってみたいなーと思い(Go, Kotlin, Django, Flask, Express, ...)、その第1回はScalaで書いてみようと思いました。そこで、ScalaでAPIを作るのに便利なライブラリAkkaがあるとのことなので、これを使っていきます。
 date: 2021/2/27
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fscala-4.svg?alt=media&token=e9fcdc29-e9a0-4a82-bbcf-571ee2b18c6d
+imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fscala-4.png?alt=media&token=7e3cf8be-bc29-48dc-9b20-28f1056f606f
 type: tech
-tag: 
-- Scala
-- バックエンド
+tag:
+  - Scala
+  - バックエンド
 ---
 
 # はじめに
+
 春休みに入って時間に少し余裕が出てきました(学会や論文書いたりしなきゃいけないが。。。)
 
+色んな言語触って API 作ってみたいなーと思い(Go, Kotlin, Django, Flask, Express, ...)、その第 1 回は Scala で書いてみようと思いました。
 
-色んな言語触ってAPI作ってみたいなーと思い(Go, Kotlin, Django, Flask, Express, ...)、その第1回はScalaで書いてみようと思いました。  
+そこで、Scala で API を作るのに便利なライブラリ`Akka`があるとのことなので、これを使っていきます。
 
-そこで、ScalaでAPIを作るのに便利なライブラリ`Akka`があるとのことなので、これを使っていきます。  
+そもそも Java は普段あまり使わなく、Scala も[こちら](https://hexx.github.io/scala_text/)で勉強した程度です。
 
-そもそもJavaは普段あまり使わなく、Scalaも[こちら](https://hexx.github.io/scala_text/)で勉強した程度です。  
-
-良くない部分がありましたら、ぜひ教えてください。  
+良くない部分がありましたら、ぜひ教えてください。
 
 # 前提と目標
-javaが動く環境は用意できている前提で書いていきます。  
 
-ビルドにはsbtを使っていきます。
+java が動く環境は用意できている前提で書いていきます。
+
+ビルドには sbt を使っていきます。
 
 また、[公式のドキュメント](https://doc.akka.io/docs/akka-http/current/introduction.html)を参考に行います。
 
 ゴールは、
+
 - `curl -H "Content-Type: application/json" -X POST -d '{"items":[{データ1},{データ2}]}' http://localhost:8080/create-order`と叩くと、DB(MySQL)に保存される
-- `curl http://localhost:8080/item/[値]`と叩くとDB(MySQL)から`[値]`に対応したJsonデータを返す
+- `curl http://localhost:8080/item/[値]`と叩くと DB(MySQL)から`[値]`に対応した Json データを返す
 
 # 動作確認
+
 まず、`build.sbt`を作成し、ビルドの準備をします。
+
 ```scala:build.sbt
 scalaVersion := "2.13.4"
 
@@ -46,7 +50,9 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http" % AkkaHttpVersion,
 )
 ```
+
 また、`/src/main/scala/Sever.scala`を作成します。
+
 ```scala:Sever.scala
 package docs.http.scaladsl
 
@@ -62,7 +68,7 @@ object HttpServerRoutingTest {
   def main(args: Array[String]): Unit = {
 
     implicit val system = ActorSystem(Behaviors.empty, "my-system")
-    
+
     implicit val executionContext = system.executionContext
 
     val route =
@@ -82,17 +88,21 @@ object HttpServerRoutingTest {
   }
 }
 ```
+
 ターミナルで`sbt run`と打つと実行されます。そして、ブラウザで`http://localhost:8080/hello`をみてみると、「Hello akka-http world!!」と表示されます！
 
 これでサーバーを起動できましたね。
 
-Returnキーを押すとシャットダウン。
+Return キーを押すとシャットダウン。
 
-## Jsonを返す
-やはり、最近のAPIはJson形式のものがほとんどだと思うので、AkkaでもJsonを扱っていきたいと思います。
+## Json を返す
+
+やはり、最近の API は Json 形式のものがほとんどだと思うので、Akka でも Json を扱っていきたいと思います。
 
 ## ビルドの準備
-まず、Json関連のライブラリを使えるように、`build.sbt`を変更します。
+
+まず、Json 関連のライブラリを使えるように、`build.sbt`を変更します。
+
 ```scala:build.sbt
 scalaVersion := "2.13.4"
 
@@ -105,10 +115,13 @@ libraryDependencies ++= Seq(
   "com.typesafe.akka" %% "akka-http-spray-json" % AkkaHttpVersion//これを追加
 )
 ```
-## Jsonとルートの設定
-今回は動作確認で作成した`Server.scala`の他に、`src/main/scala/jsonservice/`に`JsonService.scala`と`JsonMethods.scala`の2つを新たに作成します。
+
+## Json とルートの設定
+
+今回は動作確認で作成した`Server.scala`の他に、`src/main/scala/jsonservice/`に`JsonService.scala`と`JsonMethods.scala`の 2 つを新たに作成します。
 
 まず、`JsonMethods.scala`についてです。
+
 ```scala:JsonMethods.scala
 package jsonmethods
 
@@ -135,7 +148,7 @@ trait JsonMethods extends JsonSupport {
   // 必須
   implicit val system = ActorSystem(Behaviors.empty, "SprayExample")
   implicit val executionContext = system.executionContext
-  
+
   var orders: List[Item] = Nil
 　// 引数と一致するIDのデータを取得
   def fetchItem(itemId: Long): Future[Option[Item]] = Future {
@@ -151,7 +164,9 @@ trait JsonMethods extends JsonSupport {
   }
 }
 ```
+
 次に、`JsonService.scala`です。
+
 ```scala:JsonService.scala
 package jsonservice
 
@@ -190,8 +205,11 @@ trait JsonService extends Directives with JsonMethods {
     )
 }
 ```
+
 ## 動作確認
+
 実行する前に、`/src/main/scala/Sever.scala`の内容を変更しましょう。
+
 ```scala:Sever.scala
 import akka.http.scaladsl.Http
 
@@ -209,6 +227,7 @@ object JsonTest extends App with JsonService {
     .onComplete(_ => system.terminate()) // and shutdown when done
 }
 ```
+
 だいぶスッキリしましたね！
 
 それでは、`sbt run`と打って実行しましょう。
@@ -220,13 +239,15 @@ object JsonTest extends App with JsonService {
 と新規ターミナルで打ちましょう。
 
 このコマンドで、
+
 ```json:
 [
   {"name" : "aaaaa", "id" : 10}
   {"name" : "bbbbb", "id" : 0}
 ]
 ```
-をPOSTで送ります。
+
+を POST で送ります。
 
 すると、
 
@@ -238,11 +259,14 @@ object JsonTest extends App with JsonService {
 
 `curl http://localhost:8080/item/10`
 
-と打つと、idが10のJsonデータが返ってきます！
+と打つと、id が 10 の Json データが返ってきます！
 
-# MySQLとの連携
-## slickの設定
-DBと連携するために、`Slick`というライブラリを使いますので、`build.sbt`に追記します。
+# MySQL との連携
+
+## slick の設定
+
+DB と連携するために、`Slick`というライブラリを使いますので、`build.sbt`に追記します。
+
 ```scala:build.sbt
 scalaVersion := "2.13.4"
 
@@ -260,9 +284,11 @@ libraryDependencies ++= Seq(
   "mysql" % "mysql-connector-java" % "6.0.6"
 )
 ```
-また、slickの設定を`/src/main/resources/application.conf`に書いていきます。
 
-MySQLの環境は各自で用意お願いします。私は、DockerでMySQLのコンテナを立ち上げてます。
+また、slick の設定を`/src/main/resources/application.conf`に書いていきます。
+
+MySQL の環境は各自で用意お願いします。私は、Docker で MySQL のコンテナを立ち上げてます。
+
 ```conf:application.conf
 slick-mysql = {
   driver = "com.mysql.cj.jdbc.Driver",
@@ -272,7 +298,9 @@ slick-mysql = {
   connectionPool = "disabled",
 }
 ```
-↓↓↓↓今回用意したテーブル「TEST」はこんな感じです↓↓↓↓
+
+↓↓↓↓ 今回用意したテーブル「TEST」はこんな感じです ↓↓↓↓
+
 ```none
 +-------+--------------+------+-----+---------+----------------+
 | Field | Type         | Null | Key | Default | Extra          |
@@ -282,8 +310,11 @@ slick-mysql = {
 | num   | int(11)      | YES  |     | NULL    |                |
 +-------+--------------+------+-----+---------+----------------+
 ```
-## MySQLと接続
-MySQLと接続し、操作するためのコードをに`/src/main/scala/database/MysqlService.scala`書きます。
+
+## MySQL と接続
+
+MySQL と接続し、操作するためのコードをに`/src/main/scala/database/MysqlService.scala`書きます。
+
 ```scala:MysqlService.scala
 package database
 
@@ -317,8 +348,10 @@ trait MysqlService extends SprayJsonSupport with DefaultJsonProtocol {
 }
 ```
 
-## MySQLの操作
+## MySQL の操作
+
 今回はデータベースを扱うので、全章で作った`JsonService.scala`と`JsonMethods.scala`を少し変えていく必要があります。
+
 ```scala:JsonService.scala
 package jsonservice
 
@@ -358,7 +391,9 @@ trait JsonService extends Directives with JsonMethods {
     )
 }
 ```
+
 `pathPrefix("item" / IntNumber)`の部分が変わりましたね。
+
 ```scala:JsonMethods.scala
 package jsonmethods
 
@@ -379,15 +414,18 @@ trait JsonMethods extends MysqlService {
       case Item(id, name, num) => db.run(TestsTableAutoInc += item)
       case _ => None
     })
-    
+
     Future { Done }
   }
   // AutoIncrementするために必要
   protected def TestsTableAutoInc = tests returning tests.map(_.id)
 }
 ```
+
 `db.run(...)`と記述するとデータベースを操作できるんですね!
+
 ## 動作確認
+
 それでは、`sbt run`と打って実行しましょう。
 
 サーバーが起動したら、
@@ -398,23 +436,22 @@ trait JsonMethods extends MysqlService {
 
 すると、`saved completely`とレスポンスがあると思います。
 
-次に、`curl http://localhost:8080/item/10`と打つと、numが10のJsonデータが返ってきます！
+次に、`curl http://localhost:8080/item/10`と打つと、num が 10 の Json データが返ってきます！
 
 全章と違うのは、DB(MySQL)からデータを持ってきてるので、サーバーを落としても保存したデータは消えません。
 
 # まとめ
-春休み企画(仮)の第１弾として、Scalaを学ぶために「Scala + Akka HTTP」で簡単なAPIを作ってみました。
 
-Reactを触り始めた頃を思い出しましたww
+春休み企画(仮)の第１弾として、Scala を学ぶために「Scala + Akka HTTP」で簡単な API を作ってみました。
 
-Scalaは、基本をわかってないと至る所でハマってしまい難しいなと感じました。
+React を触り始めた頃を思い出しました ww
 
-しかし、DBの接続からJsonを返すところまでコンパクトに書けることに感動しました。
+Scala は、基本をわかってないと至る所でハマってしまい難しいなと感じました。
 
-今回で、Scalaとの距離が縮まったと思うので、これからも仲良くできたらいいな。。。
+しかし、DB の接続から Json を返すところまでコンパクトに書けることに感動しました。
 
-Scalaはまだまだ初心者なので、今回のコードでNGな部分やもっと上手くかけるところがありましたらアドバイスお願いします🤲
+今回で、Scala との距離が縮まったと思うので、これからも仲良くできたらいいな。。。
+
+Scala はまだまだ初心者なので、今回のコードで NG な部分やもっと上手くかけるところがありましたらアドバイスお願いします 🤲
 
 追記：使用したプログラム[こちら](https://github.com/Shinnosuke7031/scala-akka-study)
-
-

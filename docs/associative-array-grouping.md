@@ -3,18 +3,21 @@ slug: associative-array-grouping
 title: PHPの連想配列をグルーピングする方法
 description: PHPの連想配列の各要素を、とあるkeyでグルーピングする方法をまとめました。
 date: 2021/5/3
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fnew-php-logo.svg?alt=media&token=1d06892f-9706-4afe-9625-a5e3e78d01ae
+imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fnew-php-logo.png?alt=media&token=dff0076d-dce6-44a5-9107-248545e15d4e
 type: tect
-tag: 
-- PHP
-- バックエンド
+tag:
+  - PHP
+  - バックエンド
 ---
 
 # 初めに
-先日、案件対応の中で、連想配列をkeyの値でグルーピングすることがあったので、備忘録のためにもまとめました。
+
+先日、案件対応の中で、連想配列を key の値でグルーピングすることがあったので、備忘録のためにもまとめました。
 
 # 前置き
+
 ## 連想配列
+
 **連想配列**とは、以下のような配列です。
 
 ```php:
@@ -32,9 +35,11 @@ $array = [
   ['name' => 'Flask', 'language' => 'python'],
 ];
 ```
-今回は、この配列をプログラミング言語のkeyである`language`でグルーピングしていきます。
+
+今回は、この配列をプログラミング言語の key である`language`でグルーピングしていきます。
 
 最終的には、以下のようにグルーピングします！
+
 ```php:
 $grouped_array = [
   ['php'] => [
@@ -60,28 +65,36 @@ $grouped_array = [
 ```
 
 # グルーピング
+
 ## ステップ１
+
 まずは、グルーピング後の配列を入れる変数を以下のように定義します。
+
 ```php:
 $grouped_array = [];
 ```
 
 ## ステップ２
+
 続いて、以下のようにグルーピング処理を記述します。
+
 ```php:
 foreach ($array as $arr) {
   $key = $arr['language'];
   $grouped_array[$key][] = $arr;
 }
 ```
+
 非常にシンプルですよね。
 
-解説すると、配列の各要素の`language`を、`$grouped_array`のkeyにして要素を代入しています。
+解説すると、配列の各要素の`language`を、`$grouped_array`の key にして要素を代入しています。
 
-すでにkeyが存在していれば末尾に追加され、存在していなければ新たにkeyが追加されます。
+すでに key が存在していれば末尾に追加され、存在していなければ新たに key が追加されます。
 
-## ステップ3
+## ステップ 3
+
 では、グルーピングの処理を関数にしましょう。
+
 ```php:
 function grouping(array $array, string $focus_key): array {
   $g_array = [];
@@ -94,9 +107,11 @@ function grouping(array $array, string $focus_key): array {
 
 $grouped_array = grouping($array, 'language');
 ```
+
 これで、グルーピング処理の関数ができました。
 
 `var_dump($grouped_array)`で配列の中身を表示すると以下のようにグルーピングできているのが確認できます。
+
 ```none
 array(4) {
   ["php"]=>
@@ -190,7 +205,9 @@ array(4) {
   }
 }
 ```
+
 # まとめ
+
 やってみると、意外とシンプルにできました。
 
-外部APIから取得したデータをフロントエンドに渡すときに、グルーピングしてあるとその後の処理が簡潔になるので重要な処理だと思いました。
+外部 API から取得したデータをフロントエンドに渡すときに、グルーピングしてあるとその後の処理が簡潔になるので重要な処理だと思いました。

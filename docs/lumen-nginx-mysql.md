@@ -5,24 +5,25 @@ description: 掲示板APIを、Lumen(Laravel)+Nginx+MySQLで作成したので�
 date: 2021/3/1
 imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Flumen-1.svg?alt=media&token=56de4179-7bea-4945-8520-e59ca11bde72
 type: tech
-tag: 
-- Lumen
-- Nginx
-- MySQL
+tag:
+  - Lumen
+  - Nginx
+  - MySQL
 ---
 
 # はじめに
 
-最近、フロントエンドにReact、サーバーサイドにLumenを使って簡単な掲示板を開発しました。
-ちなみに、Docker上で実行しています。
+最近、フロントエンドに React、サーバーサイドに Lumen を使って簡単な掲示板を開発しました。
+ちなみに、Docker 上で実行しています。
 
-万能で機能がたくさんあるLaravelとは違い、軽量版であるLumenはハマりポイントがいくつもあって大変でした。
-しかも、Laravelに比べると情報が非常に少ない。。。
+万能で機能がたくさんある Laravel とは違い、軽量版である Lumen はハマりポイントがいくつもあって大変でした。
+しかも、Laravel に比べると情報が非常に少ない。。。
 
 中々大変だったので、この記事にまとめてみました!
 
-# Lumen, Nginx, MySQL導入
-Docker-composeが使える前提で書いているのでご注意ください
+# Lumen, Nginx, MySQL 導入
+
+Docker-compose が使える前提で書いているのでご注意ください
 
 ## ディレクトリ構成
 
@@ -51,9 +52,10 @@ Docker-composeが使える前提で書いているのでご注意ください
 
 こんな感じにしました。
 
-## Docker-compose.ymlの編集
+## Docker-compose.yml の編集
 
-Docker-compose.ymlは↓↓↓
+Docker-compose.yml は ↓↓↓
+
 ```yml:Docker-compose.yml
 version: '3'
 
@@ -72,7 +74,7 @@ services:
       DB_DATABASE: test
       DB_USERNAME: root
       DB_PASSWORD: root
-      
+
   nginx:
     build: ./Docker/nginx
     container_name: web
@@ -83,7 +85,7 @@ services:
       - 8080:80
     links:
       - backend
-      
+
   mysql:
     build: ./Docker/mysql
     container_name: db
@@ -100,17 +102,21 @@ services:
       - 13300:3306
 ```
 
-## Dockerfileの設定
-各Dockerfileは以下のように書きました。
+## Dockerfile の設定
+
+各 Dockerfile は以下のように書きました。
 
 ```Dockerfile:/Docker/nginx/Dockerfile
 FROM  nginx:latest
 ```
+
 ```Dockerfile:/Docker/mysql/Dockerfile
 FROM mysql:8.0.16
 ```
-Lumenのインストールもあるため、PHPのDockerfileは少々複雑です。
+
+Lumen のインストールもあるため、PHP の Dockerfile は少々複雑です。
 特に、ハッシュ値には注意が必要です。
+
 ```Dockerfile:/Docker/php/Dockerfile
 FROM php:7.3-fpm
 COPY php.ini /usr/local/etc/php/
@@ -133,7 +139,9 @@ ENV COMPOSER_HOME /composer
 
 ENV PATH $PATH:/composer/vendor/bin
 ```
-ついでに、php.iniも。
+
+ついでに、php.ini も。
+
 ```ini:/Docker/php/php.ini
 [Date]
 date.timezone = "Asia/Tokyo"
@@ -144,8 +152,9 @@ mbstring.language = "Japanese"
 display_errors = On
 ```
 
-# Nginxの設定
-図のように、フロントエンドからリクエストがあった際に、NginxからLumenに流れていくように設定していきます。
+# Nginx の設定
+
+図のように、フロントエンドからリクエストがあった際に、Nginx から Lumen に流れていくように設定していきます。
 ![](https://storage.googleapis.com/zenn-user-upload/t69gi8a4ml6wuv9wsd165az1byn3)
 
 ```conf:Docker/nginx/conf/default.conf
@@ -171,9 +180,11 @@ server {
   }
 }
 ```
-これでNginxとLumenを繋げることができました！
 
-# MySQLの設定
+これで Nginx と Lumen を繋げることができました！
+
+# MySQL の設定
+
 必ずコンテナを立ち上げる前にこの設定をしてください！
 
 ```conf:Docker/mysql/conf.d/my.conf
@@ -182,46 +193,64 @@ default_authentication_plugin= mysql_native_password
 explicit-defaults-for-timestamp=1
 general-log-file=/var/log/mysql/mysqld.log
 ```
-LumenとMySQLのv8は相性が悪いみたいで、この設定をしないとLumenとMySQLを接続できません。
+
+Lumen と MySQL の v8 は相性が悪いみたいで、この設定をしないと Lumen と MySQL を接続できません。
 詳しくは、[こちらの記事](https://qiita.com/ucan-lab/items/3ae911b7e13287a5b917)を参照。
 
 ここで、コンテナを立ち上げます。
+
 ```none
 $ docker-compose up -d
 ```
-そして、MySQLのコンテナに入りましょう。
+
+そして、MySQL のコンテナに入りましょう。
+
 ```none
 $ docker-compose exec mysql
 ```
-MySQL起動
+
+MySQL 起動
+
 ```none
 $ mysql -u root -p
 ```
-`docker-compose.yml`で設定したパスワードを入力してMySQLを触れるようになります。
-続いて、DBの作成
+
+`docker-compose.yml`で設定したパスワードを入力して MySQL を触れるようになります。
+続いて、DB の作成
+
 ```none
 mysql> CREATE DATABASE test;
 ```
-`$ exit`を2回打ってMySQLとコンテナから出ましょう。
 
-# Lumenの設定
+`$ exit`を 2 回打って MySQL とコンテナから出ましょう。
+
+# Lumen の設定
+
 ## 最初に
+
 `/backend/bootstrap/app.php`の
+
 ```php:
 // $app->withFacades();
 // $app->withEloquent();
 ```
+
 のコメントアウトを外しておいてください。
 
 ## Migration
-まずは、以下のコマンドでLumenのコンテナに入っていきます。
+
+まずは、以下のコマンドで Lumen のコンテナに入っていきます。
+
 ```none
 docker-compose exec backend bash
 ```
+
 続いて、
+
 ```none
 $ php artisan make:migration create_articles_table --create=articles
 ```
+
 とすると、`/backend/database/migrations/タイムスタンプ_create_articles_table.php`が生成されます。
 この`タイムスタンプ_create_articles_table.php`を以下のように編集します。
 
@@ -261,21 +290,28 @@ class CreateArticleTable extends Migration
     }
 }
 ```
+
 編集後、以下のコマンドを実行。
+
 ```none
 $ php artisan migrate
 ```
+
 ここで、`$ exit`のコマンドで一回コンテナから出ます。
-その後、MySQLのコンテナに入ってデータベースがあるか確認してみてください。
-そして、適当にデータをINSERTしておきましょう。
+その後、MySQL のコンテナに入ってデータベースがあるか確認してみてください。
+そして、適当にデータを INSERT しておきましょう。
+
 ```none
-mysql> INSERT INTO tests (name, comment, created_at, updated_at) VALUE 
+mysql> INSERT INTO tests (name, comment, created_at, updated_at) VALUE
 	('testman1', 'HELLO!', NOW(), NOW()),('testman2', 'HELLO!', NOW(), NOW()),
 ```
+
 その後、ログアウトして、コンテナから出てください。
 
-## Modelの作成
+## Model の作成
+
 `backend/app/`に新しく`Tests.php`を作成してください。
+
 ```php:Tests.php
 <?php
 
@@ -285,14 +321,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tests extends Model
 {
-  protected $table = 'tests'; 
+  protected $table = 'tests';
   protected $fillable = ['name', 'comment'];
 }
 ```
 
-## Routeの設定
+## Route の設定
+
 `backend/routes/web.php`でルーティングを設定できます。
 ここに以下のルートを追加してください。
+
 ```php:web.php
 $router->group(['prefix' => 'api/v1'], function() use ($router)
 {
@@ -300,7 +338,8 @@ $router->group(['prefix' => 'api/v1'], function() use ($router)
 }
 ```
 
-## Controllerの作成
+## Controller の作成
+
 `backend/app/Http/Controllers`に新しく`TestsController.php`を作成して、以下のように編集してください。
 
 ```php:TestsController.php
@@ -316,8 +355,8 @@ class TestsController extends Controller
 }
 ```
 
-以上でAPIの基礎的な設定が終わりです！
+以上で API の基礎的な設定が終わりです！
 
-## APIの確認
-`http://localhost:8080/api/v1/tests`に行くと、DBの内容が表示されていると思います。
+## API の確認
 
+`http://localhost:8080/api/v1/tests`に行くと、DB の内容が表示されていると思います。

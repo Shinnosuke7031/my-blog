@@ -3,36 +3,41 @@ slug: laravel-api
 title: Laravelで(CORS対策付き)APIを簡単に作る方法
 description: 現在のWEB開発では、フロントエンドとバックエンドを分離した考え方が主流になってきています。そのほうが、それぞれのロジックが混在せずに効率よく開発ができるからです。フロントエンドはAPIから情報を取得して、表示処理はJavaScript(React, Vueなど)で行います。PHPのフレームワークとして代表的なLaravelでは、APIを簡単に作成できます。今回は、その方法をまとめました。
 date: 2021/3/16
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Flaravel-1.svg?alt=media&token=6bb4ee20-dfac-4ae7-8cf9-baacd9f6ea16
+imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Flaravel-1.png?alt=media&token=c8d8aff8-88f0-41f6-a055-af4d464492f1
 type: tect
-tag: 
-- Next.js
-- React
-- SSG
+tag:
+  - Next.js
+  - React
+  - SSG
 ---
 
 # はじめに
-昨今のWEB開発では、フロントエンドとバックエンドを分離した考え方が主流になってきています。
+
+昨今の WEB 開発では、フロントエンドとバックエンドを分離した考え方が主流になってきています。
 
 そのほうが、それぞれのロジックが混在せずに効率よく開発ができるからです。
 
-PHPの最強フレームワークであるLaravelはAPIを簡単に作ることができます。
+PHP の最強フレームワークである Laravel は API を簡単に作ることができます。
 
-また、APIを作る上で誰もがハマるのがCORS(**C**ross-**O**rigin **R**esource **S**haring)です。詳しくは[こちら](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS)。
+また、API を作る上で誰もがハマるのが CORS(**C**ross-**O**rigin **R**esource **S**haring)です。詳しくは[こちら](https://developer.mozilla.org/ja/docs/Web/HTTP/CORS)。
 
-今回は、LaravelでAPI作成 + CORS対策の仕方をまとめました。
+今回は、Laravel で API 作成 + CORS 対策の仕方をまとめました。
 
 # 前提
-Laravelのインストールはできている前提で進めていきます。バージョンはこんな感じです。
+
+Laravel のインストールはできている前提で進めていきます。バージョンはこんな感じです。
+
 ```none
 Laravel Framework 6.20.18
 ```
 
-# API作成
-## Controllerの作成
-`/app/Http/Controllers/TestController.php`を作成し、Controllerでの処理を書きます。
+# API 作成
 
-`/app/Model/Test.php`には、DBに接続するための記述がしてあります(詳細は割愛)。
+## Controller の作成
+
+`/app/Http/Controllers/TestController.php`を作成し、Controller での処理を書きます。
+
+`/app/Model/Test.php`には、DB に接続するための記述がしてあります(詳細は割愛)。
 
 ```php:Controller.php
 <?php
@@ -48,32 +53,41 @@ class TestController extends Controller
   }
 }
 ```
-## routeの設定
+
+## route の設定
+
 `/routes/api.php`を編集します。
+
 ```php:api.php
 Route::get('test', 'TestController@all');
 ```
 
-これだけで、APIを叩くとTestの情報が取得できるようになります。
+これだけで、API を叩くと Test の情報が取得できるようになります。
 
-loclahost:8080でlaravelを起動している場合、このAPIは、
+loclahost:8080 で laravel を起動している場合、この API は、
+
 ```none
 http://localhost:8080/api/test
 ```
+
 と叩くと取得できます。
 
 # 問題点
+
 フロントエンドが`loclahost:3000`で起動しているとします。
 
 この場合、フロントエンドでは非同期通信で`loclahost:8080`から情報を取得することになります。
 
-しかし、Originが`loclahost:3000`と`loclahost:8080`で異なるため、CORSエラーで情報を取得できません。
+しかし、Origin が`loclahost:3000`と`loclahost:8080`で異なるため、CORS エラーで情報を取得できません。
 
-そのため、CORSの設定をする必要があります。
+そのため、CORS の設定をする必要があります。
 
-# CORSの設定
-## Middlewareの作成
-`/app/Http/Middleware/CorsMiddleware.php`を作成し、CORSの設定を書いていきます。
+# CORS の設定
+
+## Middleware の作成
+
+`/app/Http/Middleware/CorsMiddleware.php`を作成し、CORS の設定を書いていきます。
+
 ```php:CorsMiddleware.php
 <?php
 namespace App\Http\Middleware;
@@ -96,12 +110,12 @@ class CorsMiddleware
             'Access-Control-Max-Age'           => '86400',
             'Access-Control-Allow-Headers'     => 'Accept, Origin, Content-Type, Authorization, X-Requested-With'
         ];
- 
+
         if ($request->isMethod('OPTIONS'))
         {
             return response()->json('{"method":"OPTIONS"}', 200, $headers);
         }
- 
+
         $response = $next($request);
         foreach($headers as $key => $value)
         {
@@ -111,20 +125,27 @@ class CorsMiddleware
     }
 }
 ```
+
 特に重要なのが、
+
 ```php:
 'Access-Control-Allow-Origin' => '*',
 ```
+
 の部分で、ワイルドカードを指定することで全てのオリジンを許可します。
 
 もちろん、`loclahost:3000`だけを許可する際は、
+
 ```php:
 'Access-Control-Allow-Origin' => 'http://localhost:3000',
 ```
-とすればOKです。
 
-## Kernelに追加
-`/app/Http/Kernel.php`に先ほど作成したMiddlewareを追加します。
+とすれば OK です。
+
+## Kernel に追加
+
+`/app/Http/Kernel.php`に先ほど作成した Middleware を追加します。
+
 ```php:Kernel.php
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
@@ -141,8 +162,10 @@ class CorsMiddleware
     ];
 ```
 
-## routeを編集
+## route を編集
+
 `/routes/api.php`をまた編集します。
+
 ```php:api.php
 Route::group(
   ['middleware' => ['cors']],
@@ -151,6 +174,7 @@ Route::group(
   }
 );
 ```
-これで、CORS関連のヘッダーが追加されてレスポンスされるので、フロントエンドからAPIを叩いて情報を取得できます。
 
-Laravelは本当に使いやすいなー
+これで、CORS 関連のヘッダーが追加されてレスポンスされるので、フロントエンドから API を叩いて情報を取得できます。
+
+Laravel は本当に使いやすいなー

@@ -3,20 +3,21 @@ slug: markdown-codeblock-filename
 title: react-syntax-highlighterでファイル名を表示する方法
 description: react-syntax-highlighterはハイライトをつけるためのものです。主にコードのハイライトに使います。react-markdownやgray-matterと一緒に使うことで、マークダウンをhtmlに変換できますが、そのプログラムのファイル名は表示できません。この記事では私が実装した表示方法を紹介します。
 date: 2021/3/10
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Ficonfinder_markdown_298823.png?alt=media&token=14cc8363-dd94-4dc4-885a-a90595e24f9a
+imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fmaterial-ui-1.png?alt=media&token=3d6f7654-34f1-4625-ba55-8ba4c9a2732c
 type: tect
-tag: 
-- React
-- Markdown
+tag:
+  - React
+  - Markdown
 ---
 
 # はじめに
-[こちらの記事](https://nosuke-blog.site/blog/make-next-blog)で、Next.jsを使ってブログサイトを作った話をしました。
+
+[こちらの記事](https://nosuke-blog.site/blog/make-next-blog)で、Next.js を使ってブログサイトを作った話をしました。
 
 今回は、その中でもマークダウンについて話していきます！
 
-
 マークダウン関連で使用するライブラリは
+
 - react-syntax-highlighter
 - react-markdown
 - gray-matter
@@ -24,21 +25,27 @@ tag:
 です。
 
 # 前提
-Next.jsで動かす前提で書いています。
 
-しかし、Next.jsを知らなくても、Reactの基本を知っていればこの記事を理解できると思います。
+Next.js で動かす前提で書いています。
+
+しかし、Next.js を知らなくても、React の基本を知っていればこの記事を理解できると思います。
 
 # 各ライブラリについて
+
 ## react-markdown
-マークダウンをHTMLに変換するものです。Reactでマークダウンを扱う時は必須ですね。
+
+マークダウンを HTML に変換するものです。React でマークダウンを扱う時は必須ですね。
 
 ## gray-matter
-マークダウンファイル(以下、mdファイル)に記述したメタ情報(記事のタイトルや日付など)が取得できます。
+
+マークダウンファイル(以下、md ファイル)に記述したメタ情報(記事のタイトルや日付など)が取得できます。
 
 ## react-syntax-highlighter
+
 ハイライトをつけるためのものです。主にコードのハイライトに使います。
 
-↓こんなかんじ↓
+↓ こんなかんじ ↓
+
 ```typescript:Test.tsx
 const Test: FC<{}> = () => <p>This is Test.tsx</p>
 ```
@@ -46,15 +53,17 @@ const Test: FC<{}> = () => <p>This is Test.tsx</p>
 ファイル名が表示されていますが、少し手を加えないと表示されません。
 
 # ファイル名の表示
+
 ## 扱うマークダウンファイル
-```md:test.md
+
+````md:test.md
 ---
 slug: test-blog
 title: Test記事
 description: 当サイトは、Next.jsで作りました。
 date: 2021/3/2
 type: tect
-tag: 
+tag:
 - hoge
 ---
     // ここから下が本文 //
@@ -63,10 +72,12 @@ tag:
     console.log('hogehoge')
     ```
 
-```
+````
+
 ＊インデントされているのは、バッククオートをコードブロック内に表示させるためです。実際のマークダウンでは、インデントはいりません。
 
 ## 変更前
+
 ```typescript:BlogContent.tsx
 import { Fragment, FC } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -96,6 +107,7 @@ export default BlogContent
 ```
 
 重要な部分について説明します。
+
 ```typescript:
 //propsからmdファイルの中身を受け取ってます。
 const matteredData = matter(props.blogStringData)
@@ -104,15 +116,16 @@ const content = matteredData.content
 //メタ情報
 const data = matteredData.data
 ```
-`gray-matter`の`matter`で、mdファイルに記述された記事本文部分とメタ情報部分に分けることができます。
+
+`gray-matter`の`matter`で、md ファイルに記述された記事本文部分とメタ情報部分に分けることができます。
 
 ```javacript:
 <ReactMarkdown renderers={{code: CodeBlock}}>{content}</ReactMarkdown>
 ```
-`react-markdown`の`ReactMarkdown`で、本文をhtmlに変えています。
+
+`react-markdown`の`ReactMarkdown`で、本文を html に変えています。
 
 `render`に`{code: コンポーネント}`と書くことで、コードブロックをいじれます。
-
 
 それでは、そのコードブロックのコンポーネントを見てみましょう。
 
@@ -140,15 +153,17 @@ export default CodeBlock
 ```
 
 `SyntaxHighlighter`では
+
 - `language` -> `javascript:hoge.js`
 - `value` -> `console.log('hogehoge')`
 
 となります。
 
 ## 変更後
+
 それでは、ファイル名が表示されるようにしましょう。
 
-```typescript:CodeBlock.tsx
+````typescript:CodeBlock.tsx
 import { Fragment, FC } from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
 import { darcula } from "react-syntax-highlighter/dist/cjs/styles/prism"
@@ -170,7 +185,7 @@ const CodeBlock: FC<CodeBlockProps> = ({ language, value }) => {
         //ファイル名と被らんように改行を先頭につける
         {fname !== "none" && fname !== "" ? '\n'+value : value}
       </SyntaxHighlighter>
-      
+
       <style jsx>{`
         .fname {
           position: absolute;
@@ -187,20 +202,21 @@ const CodeBlock: FC<CodeBlockProps> = ({ language, value }) => {
 }
 
 export default CodeBlock
-```
+````
+
 `language`には`javascript:hoge.js`が入るので、「:」で区切ってしまえば良いわけです。
 
 ファイル名を表示させると、コードブロックの１行目と少し被ってしますので、改行から始めるようにしてます。
 
 しかし、ターミナルのコマンドなどをコードブロックで表示する際は、ファイルの種類は定義しないと思います。
 
-↓こんな感じ
+↓ こんな感じ
+
 ```none
 npm run dev
 ```
 
 その場合は、` ```none 〜 ``` `とすれば、ファイル名は表示されないようにして、改行もしないようにしてます。
-
 
 これで、コードブロックにファイル名が表示されました！
 

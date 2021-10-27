@@ -1,19 +1,19 @@
-import { Paper } from "@material-ui/core"
-import { FC } from "react"
-import MyLayout from "../components/MyLayout"
-import Link from 'next/link'
-import Head from 'next/head'
+import { Paper } from '@material-ui/core';
+import React, { FC } from 'react';
+import MyLayout from '../components/MyLayout';
+import Link from 'next/link';
+import Head from 'next/head';
 
 const links = [
-  {name: 'トップページ', path: '/'},
-  {name: '記事一覧', path: '/articles'},
-  {name: 'プロフィール', path: '/about-me'},
-  {name: 'このサイトについて', path: '/about-site'},
-  {name: 'お問い合わせ', path: '/contact'},
-  {name: 'プライバシーポリシー', path: '/policy'},
-]
+  { name: 'トップページ', path: '/' },
+  { name: '記事一覧', path: '/articles' },
+  { name: 'プロフィール', path: '/about-me' },
+  { name: 'このサイトについて', path: '/about-site' },
+  { name: 'お問い合わせ', path: '/contact' },
+  { name: 'プライバシーポリシー', path: '/policy' },
+];
 
-const SiteMap: FC<{}> = () => {
+const SiteMap: FC = () => {
   return (
     <MyLayout>
       <Head>
@@ -21,18 +21,18 @@ const SiteMap: FC<{}> = () => {
         <meta name="description" content="NOSUKE BLOGのサイトマップです" />
       </Head>
       <Paper elevation={10}>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <ul>
-          {links.map(link => 
+          {links.map((link) => (
             <li key={link.path}>
               <Link href={link.path}>
                 <a>{link.name}</a>
               </Link>
-              <br/>
-              <br/>
-            </li>  
-          )}
+              <br />
+              <br />
+            </li>
+          ))}
         </ul>
       </Paper>
       <style jsx>{`
@@ -45,7 +45,7 @@ const SiteMap: FC<{}> = () => {
         }
       `}</style>
     </MyLayout>
-  )
-}
+  );
+};
 
-export default SiteMap
+export default SiteMap;

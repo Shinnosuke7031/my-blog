@@ -1,23 +1,26 @@
-import { Fragment, FC } from "react"
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { darcula } from "react-syntax-highlighter/dist/cjs/styles/prism"
+import React, { Fragment, FC } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { darcula } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 interface P {
-  value: string
-  language?: string
+  value: string;
+  language?: string;
 }
 
 const CodeBlock: FC<P> = ({ language, value }) => {
   // Markdownで```javascript:hoge.jsx ...```と入力すると、languageにjavascript:hoge.jsxが入る
   // そのため、':'で分けて、コードの言語とファイル名をゲットだぜ
-  const [ codeLanguage, fname ] = language!=="none" ? language.split(':') : [undefined, 'none']
+  const [codeLanguage, fname] =
+    language !== 'none' ? language.split(':') : [undefined, 'none'];
   return (
     <Fragment>
-      {fname !== "none" && fname !== "" && <p className='fname'>&nbsp;{fname}&nbsp;</p>}
+      {fname !== 'none' && fname !== '' && (
+        <p className="fname">&nbsp;{fname}&nbsp;</p>
+      )}
       <SyntaxHighlighter language={codeLanguage} style={darcula}>
-        {fname !== "none" && fname !== "" ? '\n'+value : value}
+        {fname !== 'none' && fname !== '' ? '\n' + value : value}
       </SyntaxHighlighter>
-      
+
       <style jsx>{`
         .fname {
           position: absolute;
@@ -30,7 +33,7 @@ const CodeBlock: FC<P> = ({ language, value }) => {
         }
       `}</style>
     </Fragment>
-  )
-}
+  );
+};
 
-export default CodeBlock
+export default CodeBlock;

@@ -1,11 +1,11 @@
-import Head from "next/head";
-import React from "react";
-import PropTypes from "prop-types";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import * as gtag from "../libs/gtag";
-import { useRouter } from "next/router";
+import Head from 'next/head';
+import React from 'react';
+import PropTypes from 'prop-types';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import * as gtag from '../libs/gtag';
+import { useRouter } from 'next/router';
 
-import "../styles/globals.css";
+import '../styles/globals.css';
 
 export default function MyApp(props) {
   const { Component, pageProps } = props;
@@ -13,7 +13,7 @@ export default function MyApp(props) {
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
+    const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
@@ -28,9 +28,9 @@ export default function MyApp(props) {
       gtag.pageview(path);
     };
 
-    router.events.on("routeChangeComplete", handleRouteChange);
+    router.events.on('routeChangeComplete', handleRouteChange);
     return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
+      router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
 

@@ -1,18 +1,39 @@
-import { FC, Fragment } from "react"
-import MailOutlineIcon from '@material-ui/icons/MailOutline'
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
-import WebAssetIcon from '@material-ui/icons/WebAsset'
-import Link from 'next/link'
-import { useMediaQuery } from "react-responsive"
+import React, { FC, Fragment } from 'react';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import WebAssetIcon from '@material-ui/icons/WebAsset';
+import Link from 'next/link';
+import { useMediaQuery } from 'react-responsive';
 
-const NavOfSiteAndContactMe: FC<{}> = () => {
-  const isMobileScreen = useMediaQuery({ query: '(max-width: 700px)'})
+const NavOfSiteAndContactMe: FC = () => {
+  const isMobileScreen = useMediaQuery({ query: '(max-width: 700px)' });
   return (
     <Fragment>
       <div className={isMobileScreen ? 'navbar-mob' : 'navbar'}>
-        <div><Link href='/about-me'><a className='nav-el'><AccountBoxIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Me</p>  </a></Link></div>
-        <div><Link href='/about-site'><a className='nav-el'><WebAssetIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>About Site</p>  </a></Link></div>
-        <div><Link href='/contact'><a className='nav-el'><MailOutlineIcon style={{color: "grey"}} fontSize='large' /> <p style={{color: "grey"}}>Contact</p> </a></Link></div>
+        <div>
+          <Link href="/about-me">
+            <a className="nav-el">
+              <AccountBoxIcon style={{ color: 'grey' }} fontSize="large" />{' '}
+              <p style={{ color: 'grey' }}>About Me</p>{' '}
+            </a>
+          </Link>
+        </div>
+        <div>
+          <Link href="/about-site">
+            <a className="nav-el">
+              <WebAssetIcon style={{ color: 'grey' }} fontSize="large" />{' '}
+              <p style={{ color: 'grey' }}>About Site</p>{' '}
+            </a>
+          </Link>
+        </div>
+        <div>
+          <Link href="/contact">
+            <a className="nav-el">
+              <MailOutlineIcon style={{ color: 'grey' }} fontSize="large" />{' '}
+              <p style={{ color: 'grey' }}>Contact</p>{' '}
+            </a>
+          </Link>
+        </div>
       </div>
       <br />
       <style jsx>{`
@@ -57,7 +78,7 @@ const NavOfSiteAndContactMe: FC<{}> = () => {
         }
       `}</style>
     </Fragment>
-  )
-}
+  );
+};
 
-export default NavOfSiteAndContactMe
+export default NavOfSiteAndContactMe;

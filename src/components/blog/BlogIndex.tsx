@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { Paper } from "@material-ui/core";
-import NinjaAd from "../ad/NinjaAd";
+import React, { FC } from 'react';
+import { Paper } from '@material-ui/core';
+import NinjaAd from '../ad/NinjaAd';
 
 type Props = {
   blogStringData: string;
@@ -9,14 +9,14 @@ type Props = {
 const BlogIndex: FC<Props> = (props) => {
   const heading = props.blogStringData.match(/#+? .+/g);
   const headingData = heading.map((el) => {
-    if (el.slice(0, 2) === "# ") {
+    if (el.slice(0, 2) === '# ') {
       return { level: 1, value: el.slice(2) };
-    } else if (el.slice(0, 2) === "##") {
+    } else if (el.slice(0, 2) === '##') {
       return { level: 2, value: el.slice(3) };
     }
   });
   return (
-    <div style={{ position: "sticky", top: "100px" }}>
+    <div style={{ position: 'sticky', top: '100px' }}>
       <Paper elevation={10}>
         <p className="index-title">Index</p>
         <ul>
@@ -29,7 +29,7 @@ const BlogIndex: FC<Props> = (props) => {
               <li key={index}>
                 <a href={`#${data.value}`}>{data.value}</a>
               </li>
-            )
+            ),
           )}
         </ul>
         <style jsx>{`
@@ -52,7 +52,7 @@ const BlogIndex: FC<Props> = (props) => {
             display: inline-block;
             width: 3px;
             height: 3px;
-            content: "";
+            content: '';
             border-radius: 100%;
             background: rgb(0, 0, 0);
           }

@@ -1,37 +1,26 @@
-import {FC, ReactNode} from 'react'
-import Footer from './layout/Footer'
-import Header from './layout/Header'
-import { useMediaQuery } from "react-responsive"
+import React, { FC, ReactNode } from 'react';
+import Footer from './layout/Footer';
+import Header from './layout/Header';
+import { useMediaQuery } from 'react-responsive';
 
 const MyLayout: FC<ReactNode> = (props) => {
-  const isPCScreen = useMediaQuery({ query: '(min-width: 1100px)'})
-  const isTabletScreen = useMediaQuery({ query: '(min-width: 701px) and (max-width: 1099px)'})
-  const isMobileScreen = useMediaQuery({ query: '(max-width: 700px)'})
+  const isPCScreen = useMediaQuery({ query: '(min-width: 1100px)' });
+  const isTabletScreen = useMediaQuery({
+    query: '(min-width: 701px) and (max-width: 1099px)',
+  });
+  const isMobileScreen = useMediaQuery({ query: '(max-width: 700px)' });
   return (
     <div className="container">
       <Header />
       <div className="main">
-        {isPCScreen &&
-        <div className="box-pc">
-          {props.children}
-        </div>
-        }
-        {isTabletScreen &&
-        <div className="box-tab">
-          {props.children}
-        </div>
-        }
-        {isMobileScreen &&
-        <div className="box-mob">
-          {props.children}
-        </div>
-        }
+        {isPCScreen && <div className="box-pc">{props.children}</div>}
+        {isTabletScreen && <div className="box-tab">{props.children}</div>}
+        {isMobileScreen && <div className="box-mob">{props.children}</div>}
         {/* <div className={isMobileScreen ? "box-mob" : "box"}>
           {props.children}
         </div> */}
       </div>
       <Footer />
-
 
       <style jsx>{`
         .container {
@@ -81,7 +70,7 @@ const MyLayout: FC<ReactNode> = (props) => {
         }
       `}</style>
     </div>
-  )
-}
+  );
+};
 
-export default MyLayout
+export default MyLayout;

@@ -1,28 +1,28 @@
-import { FC } from "react"
+import React, { FC } from 'react';
 
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 type typeProps = {
   settings: any;
   imgs: {
     title: string;
     src: string;
-  }[]
-}
+  }[];
+};
 
 const ImgSlider: FC<typeProps> = (props) => {
-  const settings = props.settings
-  const imgs = props.imgs
+  const settings = props.settings;
+  const imgs = props.imgs;
   return (
     <Slider {...settings} className="slick">
-      {imgs.map((img, index) =>
-        <div key={index} className='slickimg'>
+      {imgs.map((img, index) => (
+        <div key={index} className="slickimg">
           <img src={img.src} height="150px" />
           <p>{img.title}</p>
         </div>
-      )}
+      ))}
       <style jsx>{`
         .slick {
           width: fit-content;
@@ -43,7 +43,7 @@ const ImgSlider: FC<typeProps> = (props) => {
         }
       `}</style>
     </Slider>
-  )
-}
+  );
+};
 
-export default ImgSlider
+export default ImgSlider;

@@ -1,0 +1,6 @@
+build/
+public/
+docs/
+**/node_modules/
+*.config.js
+src/pages/*.js

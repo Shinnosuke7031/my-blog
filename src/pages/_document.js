@@ -1,7 +1,7 @@
-import React from "react";
-import Document, { Html, Main, NextScript, Head } from "next/document";
-import { ServerStyleSheets } from "@material-ui/core/styles";
-import { existsGaId, GA_ID } from "../libs/gtag";
+import React from 'react';
+import Document, { Html, Main, NextScript, Head } from 'next/document';
+import { ServerStyleSheets } from '@material-ui/core/styles';
+import { existsGaId, GA_ID } from '../libs/gtag';
 
 export default class MyDocument extends Document {
   render() {
@@ -35,7 +35,7 @@ export default class MyDocument extends Document {
           <script
             async
             src={
-              "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1651494766691774"
+              'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1651494766691774'
             }
             crossOrigin="anonymous"
           />

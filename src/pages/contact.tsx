@@ -1,13 +1,12 @@
-import GitHubIcon from '@material-ui/icons/GitHub'
-import TwitterIcon from '@material-ui/icons/Twitter'
-import MailOutlineIcon from '@material-ui/icons/MailOutline'
-import Paper from "@material-ui/core/Paper"
-import { FC } from 'react'
-import MyLayout from '../components/MyLayout'
-import Head from 'next/head'
+import GitHubIcon from '@material-ui/icons/GitHub';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import Paper from '@material-ui/core/Paper';
+import React, { FC } from 'react';
+import MyLayout from '../components/MyLayout';
+import Head from 'next/head';
 
-const ContactInfoes: FC<{}> = () => {
-
+const ContactInfoes: FC = () => {
   return (
     <MyLayout>
       <Head>
@@ -17,15 +16,23 @@ const ContactInfoes: FC<{}> = () => {
       <Paper elevation={10}>
         <h1 className={'title'}>Contact</h1>
         <div className={'contact'}>
-
           <div className={'mail'}>
-            <MailOutlineIcon style={{color: "grey"}} fontSize='large' />
-            <a className={`${'show_line_from_left'} ${'change_color_from_left'}`} href="mailto:8120505@ed.tus.ac.jp">8120505@ed.tus.ac.jp</a>
+            <MailOutlineIcon style={{ color: 'grey' }} fontSize="large" />
+            <a
+              className={`${'show_line_from_left'} ${'change_color_from_left'}`}
+              href="mailto:8120505@ed.tus.ac.jp"
+            >
+              8120505@ed.tus.ac.jp
+            </a>
           </div>
-          <hr/>
+          <hr />
           <div>
-            <a href="https://github.com/Shinnosuke7031"><GitHubIcon style={{color: "#000000"}} fontSize='large' /> </a>
-            <a href="https://twitter.com/web7031boushi"><TwitterIcon fontSize='large' /> </a>
+            <a href="https://github.com/Shinnosuke7031">
+              <GitHubIcon style={{ color: '#000000' }} fontSize="large" />{' '}
+            </a>
+            <a href="https://twitter.com/web7031boushi">
+              <TwitterIcon fontSize="large" />{' '}
+            </a>
           </div>
         </div>
         <br />
@@ -49,10 +56,10 @@ const ContactInfoes: FC<{}> = () => {
           border-radius: 5px;
         }
         @media screen and (max-width: 500px) {
-                            .contact {
-                              width: 100%;
-                            }
-                          }
+          .contact {
+            width: 100%;
+          }
+        }
 
         .contact a {
           text-decoration: none;
@@ -94,7 +101,7 @@ const ContactInfoes: FC<{}> = () => {
 
         .contact_icon {
           color: black;
-          transform: scale(1.0, 1.0);
+          transform: scale(1, 1);
           transition: 0.4s;
         }
 
@@ -106,6 +113,6 @@ const ContactInfoes: FC<{}> = () => {
       `}</style>
     </MyLayout>
   );
-}
+};
 
-export default ContactInfoes
+export default ContactInfoes;

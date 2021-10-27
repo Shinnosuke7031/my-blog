@@ -1,24 +1,24 @@
-import { FC, Fragment } from "react";
+import React, { FC, Fragment } from 'react';
 type typeNode = {
   children: {
     type: string;
     value: string;
     position: any;
-  }[]
-  depth: number
-  position: any
-  type: string
-}
+  }[];
+  depth: number;
+  position: any;
+  type: string;
+};
 type Props = {
-  level: number
-  node: typeNode
-  children: any
-}
+  level: number;
+  node: typeNode;
+  children: any;
+};
 
 const Heading: FC<Props> = (props) => {
-  const level = props.level
-  const textValue = props.node.children[0].value
-  
+  const level = props.level;
+  const textValue = props.node.children[0].value;
+
   return (
     <Fragment>
       {level === 1 && <h1 id={textValue}>&nbsp;{textValue}</h1>}
@@ -32,7 +32,7 @@ const Heading: FC<Props> = (props) => {
         }
       `}</style>
     </Fragment>
-  )
-}
+  );
+};
 
-export default Heading
+export default Heading;

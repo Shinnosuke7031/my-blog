@@ -12,7 +12,7 @@ const AdmaxSwitch: React.FC<{
   classAdName: string;
   width?: number;
   height?: number;
-}> = React.memo((props) => {
+}> = (props) => {
   useEffect(() => {
     //     <!-- admax -->
     // <div class="admax-ads" data-admax-id="551add5a0182aea0766e5b41a74841b3" style="display:inline-block;width:300px;height:250px;"></div>
@@ -39,11 +39,11 @@ const AdmaxSwitch: React.FC<{
       document.body.removeChild(tag);
       admaxads.splice(
         admaxads.findIndex((ad) => ad.admax_id === props.id),
-        1
+        1,
       );
       window['__admax_tag__'] = undefined;
     };
-  }, []);
+  }, [props.id, props.type]);
   return (
     <div
       className={props.classAdName}
@@ -51,6 +51,6 @@ const AdmaxSwitch: React.FC<{
       style={{ display: 'inline-block' }}
     />
   );
-});
+};
 
 export default AdmaxSwitch;

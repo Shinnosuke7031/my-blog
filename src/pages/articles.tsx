@@ -1,5 +1,10 @@
 import React, { FC, Fragment } from 'react';
-import { makeStyles, useTheme, Theme, createStyles } from '@material-ui/core/styles';
+import {
+  makeStyles,
+  useTheme,
+  Theme,
+  createStyles,
+} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,18 +19,12 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import MyLayout from '../components/MyLayout';
-import fs from 'fs'
-import Link from 'next/link'
-import { GetStaticProps } from 'next'
-import matter from 'gray-matter'
-import Head from 'next/head'
-import dynamic from 'next/dynamic'
-import styles from '../styles/animation.module.css'
-
-const DynamicSerachBlog = dynamic(
-  () => import('../components/blog/SearchBlog'),
-  { loading: () => <div className={styles.loader}></div> }
-)
+import fs from 'fs';
+import Link from 'next/link';
+import { GetStaticProps } from 'next';
+import matter from 'gray-matter';
+import Head from 'next/head';
+import SearchBlog from '../components/blog/SearchBlog';
 
 const useStyles1 = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,31 +39,42 @@ interface TablePaginationActionsProps {
   count: number;
   page: number;
   rowsPerPage: number;
-  onChangePage: (event: React.MouseEvent<HTMLButtonElement>, newPage: number) => void;
+  onChangePage: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    newPage: number,
+  ) => void;
 }
 
 type Props = {
-  blogDataString: string[]
-}
+  blogDataString: string[];
+};
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const classes = useStyles1();
   const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
 
-  const handleFirstPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleFirstPageButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     onChangePage(event, 0);
   };
 
-  const handleBackButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleBackButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     onChangePage(event, page - 1);
   };
 
-  const handleNextButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleNextButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     onChangePage(event, page + 1);
   };
 
-  const handleLastPageButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleLastPageButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
@@ -77,15 +87,27 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
       >
         {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
-      <IconButton onClick={handleBackButtonClick} disabled={page === 0} aria-label="previous page">
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === 'rtl' ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === 'rtl' ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
@@ -98,7 +120,13 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
   );
 }
 
-function createData(title: string, date: string, tag: string[], imgpath: string, slug: string) {
+function createData(
+  title: string,
+  date: string,
+  tag: string[],
+  imgpath: string,
+  slug: string,
+) {
   return { title, date, tag, imgpath, slug };
 }
 
@@ -113,30 +141,36 @@ const Articles: FC<Props> = (props) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const matterdData = props.blogDataString.map(data => matter(data))
-  const rowsData = matterdData.map(data => ({
+  const matterdData = props.blogDataString.map((data) => matter(data));
+  const rowsData = matterdData.map((data) => ({
     slug: data.data.slug,
     title: data.data.title,
     description: data.data.description,
     date: data.data.date,
     type: data.data.type,
     tag: data.data.tag,
-    imgpath: data.data.imgpath
-  }))
+    imgpath: data.data.imgpath,
+  }));
 
-  const rows = rowsData.map(row => (createData(row.title, row.date, row.tag, row.imgpath, row.slug)))
+  const rows = rowsData.map((row) =>
+    createData(row.title, row.date, row.tag, row.imgpath, row.slug),
+  );
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage)
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
     setPage(newPage);
-  }
+  };
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
-  }
+  };
 
   return (
     <Fragment>
@@ -145,36 +179,50 @@ const Articles: FC<Props> = (props) => {
         <meta name="description" content="NOSUKE BLOGの記事一覧です" />
       </Head>
       <MyLayout>
-        <Paper elevation={10} style={{padding: '1rem'}}>
-          <DynamicSerachBlog isTagDisplayed={true} blogMetaData={rowsData} />
+        <Paper elevation={10} style={{ padding: '1rem' }}>
+          <SearchBlog isTagDisplayed={true} blogMetaData={rowsData} />
         </Paper>
-        <br/>
+        <br />
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="custom pagination table">
             <TableBody>
               {(rowsPerPage > 0
-                ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                ? rows.slice(
+                    page * rowsPerPage,
+                    page * rowsPerPage + rowsPerPage,
+                  )
                 : rows
-                ).map(row => (
-                  <Link href={`/blog/${row.slug}`} key={row.title}>
-                  <TableRow style={{cursor: 'pointer'}}>
-                  <TableCell component="th" scope="row">
-                    <img src={row.imgpath} width='50px' height='50px' />
-                  </TableCell>
-                  <TableCell component="th" scope="row">
-                    <span style={{fontWeight: 'bold'}}>{row.title}</span>
-                  </TableCell>
-                  <TableCell style={{ width: 160 }} align="right">
-                    {row.tag.map((tag, index) => index === row.tag.length - 1 ? 
-                    <span className="tag" key={index}>{tag}</span>:
-                    <span className="tag" style={{margin: '0 0.5rem 0 0'}} key={index}>{tag}</span>
-                    )}
-                  </TableCell>
-                  <TableCell style={{ width: 100 }} align="right">
-                    {row.date}
-                  </TableCell>
-                </TableRow>
-                  </Link>
+              ).map((row) => (
+                <Link href={`/blog/${row.slug}`} key={row.title}>
+                  <TableRow style={{ cursor: 'pointer' }}>
+                    <TableCell component="th" scope="row">
+                      <img src={row.imgpath} width="50px" height="50px" />
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      <span style={{ fontWeight: 'bold' }}>{row.title}</span>
+                    </TableCell>
+                    <TableCell style={{ width: 160 }} align="right">
+                      {row.tag.map((tag, index) =>
+                        index === row.tag.length - 1 ? (
+                          <span className="tag" key={index}>
+                            {tag}
+                          </span>
+                        ) : (
+                          <span
+                            className="tag"
+                            style={{ margin: '0 0.5rem 0 0' }}
+                            key={index}
+                          >
+                            {tag}
+                          </span>
+                        ),
+                      )}
+                    </TableCell>
+                    <TableCell style={{ width: 100 }} align="right">
+                      {row.date}
+                    </TableCell>
+                  </TableRow>
+                </Link>
               ))}
               {emptyRows > 0 && (
                 <TableRow style={{ height: 53 * emptyRows }}>
@@ -185,7 +233,7 @@ const Articles: FC<Props> = (props) => {
             <TableFooter>
               <TableRow>
                 <TablePagination
-                  rowsPerPageOptions={[10, 25, 50,{ label: 'All', value: -1 }]}
+                  rowsPerPageOptions={[10, 25, 50, { label: 'All', value: -1 }]}
                   colSpan={3}
                   count={rows.length}
                   rowsPerPage={rowsPerPage}
@@ -197,7 +245,7 @@ const Articles: FC<Props> = (props) => {
                   onChangePage={handleChangePage}
                   onChangeRowsPerPage={handleChangeRowsPerPage}
                   ActionsComponent={TablePaginationActions}
-                  />
+                />
               </TableRow>
             </TableFooter>
           </Table>
@@ -213,41 +261,43 @@ const Articles: FC<Props> = (props) => {
       `}</style>
     </Fragment>
   );
-}
+};
 
 export const getStaticProps: GetStaticProps = async () => {
-  const files = fs.readdirSync(process.cwd() + '/docs', 'utf8')
+  const files = fs.readdirSync(process.cwd() + '/docs', 'utf8');
 
-  const blogs = files.filter((fn) => fn.endsWith(".md"))
+  const blogs = files.filter((fn) => fn.endsWith('.md'));
 
   const blogDataString = blogs.map((blog) => {
-    const path = `${process.cwd()}/docs/${blog}`
+    const path = `${process.cwd()}/docs/${blog}`;
     const data = fs.readFileSync(path, {
-      encoding: "utf-8",
-    })
-    return data
-  })
+      encoding: 'utf-8',
+    });
+    return data;
+  });
 
-  const matteredData = blogDataString.map(blog => matter(blog))
-  const blogDateArray = matteredData.map(el => {
-    const timeSppietdBefore: string = el.data.date
-    const timeSppietd: number[] = timeSppietdBefore.split('/').map(el => Number(el))
-    return timeSppietd[0] * 24 * 366 + timeSppietd[1] * 24 * 31 + timeSppietd[2] * 24
-  })
-  
-  for (let index = 0; index < blogDateArray.length-1; index++) {
+  const matteredData = blogDataString.map((blog) => matter(blog));
+  const blogDateArray = matteredData.map((el) => {
+    const timeSppietdBefore: string = el.data.date;
+    const timeSppietd: number[] = timeSppietdBefore
+      .split('/')
+      .map((el) => Number(el));
+    return (
+      timeSppietd[0] * 24 * 366 + timeSppietd[1] * 24 * 31 + timeSppietd[2] * 24
+    );
+  });
+
+  for (let index = 0; index < blogDateArray.length - 1; index++) {
     for (let index2 = 0; index2 < blogDateArray.length; index2++) {
+      if (blogDateArray[index2] < blogDateArray[index2 + 1]) {
+        const tmp = blogDateArray[index2];
+        blogDateArray[index2] = blogDateArray[index2 + 1];
+        blogDateArray[index2 + 1] = tmp;
 
-      if (blogDateArray[index2] < blogDateArray[index2+1]) {
-        let tmp = blogDateArray[index2]
-        blogDateArray[index2] = blogDateArray[index2+1]
-        blogDateArray[index2+1] = tmp
-        
-        let tmp2 = blogDataString[index2]
-        blogDataString[index2] = blogDataString[index2+1]
-        blogDataString[index2+1] = tmp2
+        const tmp2 = blogDataString[index2];
+        blogDataString[index2] = blogDataString[index2 + 1];
+        blogDataString[index2 + 1] = tmp2;
       }
-
     }
   }
 
@@ -255,7 +305,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       blogDataString: blogDataString,
     },
-  }
-}
+  };
+};
 
-export default Articles
+export default Articles;

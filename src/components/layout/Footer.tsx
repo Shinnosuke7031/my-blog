@@ -1,9 +1,11 @@
-import { FC } from "react"
-import Link from 'next/link'
-import { useMediaQuery } from "react-responsive"
+import React, { FC } from 'react';
+import Link from 'next/link';
+import { useMediaQuery } from 'react-responsive';
 
 const Footer: FC = () => {
-  const isMobileVerticallyScreen = useMediaQuery({ query: '(max-width: 508px)'})
+  const isMobileVerticallyScreen = useMediaQuery({
+    query: '(max-width: 508px)',
+  });
   return (
     <footer>
       {/* {!isMobileVerticallyScreen ? <div className='links'>
@@ -25,19 +27,41 @@ const Footer: FC = () => {
         <p>プライバシーポリシー</p>
       </div>
       } */}
-      <div className='links'>
-        <p> <Link href='/'><a>ホーム</a></Link></p>
-        {!isMobileVerticallyScreen && <p className='separation'>&#124;</p>}
-        <p> <Link href='/about-me'><a>運営者</a></Link></p>
-        {!isMobileVerticallyScreen && <p className='separation'>&#124;</p>}
-        <p><Link href='/contact'><a>お問い合わせ</a></Link></p>
-        {!isMobileVerticallyScreen && <p className='separation'>&#124;</p>}
-        <p><Link href='/site-map'><a>サイトマップ</a></Link></p>
-        {!isMobileVerticallyScreen && <p className='separation'>&#124;</p>}
-        <p><Link href='/policy'><a>プライバシーポリシー</a></Link></p>
+      <div className="links">
+        <p>
+          {' '}
+          <Link href="/">
+            <a>ホーム</a>
+          </Link>
+        </p>
+        {!isMobileVerticallyScreen && <p className="separation">&#124;</p>}
+        <p>
+          {' '}
+          <Link href="/about-me">
+            <a>運営者</a>
+          </Link>
+        </p>
+        {!isMobileVerticallyScreen && <p className="separation">&#124;</p>}
+        <p>
+          <Link href="/contact">
+            <a>お問い合わせ</a>
+          </Link>
+        </p>
+        {!isMobileVerticallyScreen && <p className="separation">&#124;</p>}
+        <p>
+          <Link href="/site-map">
+            <a>サイトマップ</a>
+          </Link>
+        </p>
+        {!isMobileVerticallyScreen && <p className="separation">&#124;</p>}
+        <p>
+          <Link href="/policy">
+            <a>プライバシーポリシー</a>
+          </Link>
+        </p>
       </div>
       <div>
-        <p className='c-mark'>©︎ NOSUKE BLOG</p>
+        <p className="c-mark">©︎ NOSUKE BLOG</p>
       </div>
       <style jsx>{`
         footer {
@@ -80,7 +104,7 @@ const Footer: FC = () => {
         }
       `}</style>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

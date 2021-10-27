@@ -1,60 +1,108 @@
-import { FC, Fragment, useState } from 'react'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useMediaQuery } from "react-responsive"
-import Drawer from '@material-ui/core/Drawer'
-import MenuIcon from '@material-ui/icons/Menu'
-import HeaderMenu from '../layout/HeaderMenu'
+import React, { FC, Fragment, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useMediaQuery } from 'react-responsive';
+import Drawer from '@material-ui/core/Drawer';
+import MenuIcon from '@material-ui/icons/Menu';
+import HeaderMenu from '../layout/HeaderMenu';
 
 const Header: FC = () => {
-  const router = useRouter()
-  const pathname = router.pathname
-  const isPCScreen = useMediaQuery({ query: '(min-width: 700px)'})
-  const isMobileScreen = useMediaQuery({ query: '(max-width: 699px)'})
+  const router = useRouter();
+  const pathname = router.pathname;
+  const isPCScreen = useMediaQuery({ query: '(min-width: 700px)' });
+  const isMobileScreen = useMediaQuery({ query: '(max-width: 699px)' });
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleDrawer = (open: boolean) => (
-    event: React.KeyboardEvent | React.MouseEvent,
-  ) => {
-    if (
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
-    ) {
-      return;
-    }
-    setIsOpen(open);
-  };
+  const toggleDrawer =
+    (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
+      if (
+        event.type === 'keydown' &&
+        ((event as React.KeyboardEvent).key === 'Tab' ||
+          (event as React.KeyboardEvent).key === 'Shift')
+      ) {
+        return;
+      }
+      setIsOpen(open);
+    };
 
   return (
-    <div className='container'>
+    <div className="container">
       <div className={isMobileScreen ? 'container2-mob' : 'container2'}>
-
-      {pathname === '/' ? <h1 className='toppage' style={{cursor: 'default'}}>NOSUKE BLOG</h1> :
-        <div className='container3'>
-          <div className='header-title'> <Link href="/"><h1 className='hoverd-underline'>NOSUKE BLOG</h1></Link> </div>
-          {isPCScreen && 
-          <div className='links'>
-            <Link href="/articles">{pathname === '/articles' || pathname === '/blog/[slug]' ? <p className='hoverd-underline'><span>Articles</span></p> : <p className='hoverd-underline'>Articles</p>}</Link>
-            <Link href="/about-me">{pathname === '/about-me' ? <p className='hoverd-underline'><span>Profile</span></p> : <p className='hoverd-underline'>Profile</p>}</Link>
-            <Link href="/about-site">{pathname === '/about-site' ? <p className='hoverd-underline'><span>About This Site</span></p> : <p className='hoverd-underline'>About This Site</p>}</Link>
-            <Link href="/contact">{pathname === '/contact' ? <p className='hoverd-underline'><span>Contact</span></p> : <p className='hoverd-underline'>Contact</p>}</Link>
-          </div>}
-          {isMobileScreen && 
-          <Fragment>
-            <div className='menu-icon'>
-              <MenuIcon onClick={toggleDrawer(true)} style={{cursor: 'pointer'}} fontSize='large' />
+        {pathname === '/' ? (
+          <h1 className="toppage" style={{ cursor: 'default' }}>
+            NOSUKE BLOG
+          </h1>
+        ) : (
+          <div className="container3">
+            <div className="header-title">
+              {' '}
+              <Link href="/">
+                <h1 className="hoverd-underline">NOSUKE BLOG</h1>
+              </Link>{' '}
             </div>
-            <Drawer anchor='right' open={isOpen} onClose={toggleDrawer(false)}>
-              <HeaderMenu />
-            </Drawer>
-          </Fragment>
-          }
-        </div>
-      }
+            {isPCScreen && (
+              <div className="links">
+                <Link href="/articles">
+                  {pathname === '/articles' || pathname === '/blog/[slug]' ? (
+                    <p className="hoverd-underline">
+                      <span>Articles</span>
+                    </p>
+                  ) : (
+                    <p className="hoverd-underline">Articles</p>
+                  )}
+                </Link>
+                <Link href="/about-me">
+                  {pathname === '/about-me' ? (
+                    <p className="hoverd-underline">
+                      <span>Profile</span>
+                    </p>
+                  ) : (
+                    <p className="hoverd-underline">Profile</p>
+                  )}
+                </Link>
+                <Link href="/about-site">
+                  {pathname === '/about-site' ? (
+                    <p className="hoverd-underline">
+                      <span>About This Site</span>
+                    </p>
+                  ) : (
+                    <p className="hoverd-underline">About This Site</p>
+                  )}
+                </Link>
+                <Link href="/contact">
+                  {pathname === '/contact' ? (
+                    <p className="hoverd-underline">
+                      <span>Contact</span>
+                    </p>
+                  ) : (
+                    <p className="hoverd-underline">Contact</p>
+                  )}
+                </Link>
+              </div>
+            )}
+            {isMobileScreen && (
+              <Fragment>
+                <div className="menu-icon">
+                  <MenuIcon
+                    onClick={toggleDrawer(true)}
+                    style={{ cursor: 'pointer' }}
+                    fontSize="large"
+                  />
+                </div>
+                <Drawer
+                  anchor="right"
+                  open={isOpen}
+                  onClose={toggleDrawer(false)}
+                >
+                  <HeaderMenu />
+                </Drawer>
+              </Fragment>
+            )}
+          </div>
+        )}
       </div>
-      
+
       <style jsx>{`
         .container {
           position: sticky;
@@ -129,7 +177,7 @@ const Header: FC = () => {
           background: #00aeff;
           opacity: 0;
           visibility: hidden;
-          transition: .3s;
+          transition: 0.3s;
         }
         .hoverd-underline:hover::after {
           bottom: -4px;
@@ -141,8 +189,8 @@ const Header: FC = () => {
           text-align: right;
         }
       `}</style>
-    </div>   
+    </div>
   );
-}
+};
 
-export default Header
+export default Header;

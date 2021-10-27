@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "format": "prettier --write 'src/**/*.js' && eslint ./src/"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
@@ -28,7 +29,13 @@
     "@types/react-responsive": "^8.0.2",
     "@types/react-slick": "^0.23.4",
     "@types/react-syntax-highlighter": "^13.5.0",
+    "@typescript-eslint/eslint-plugin": "^5.2.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.26.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "nextjs-sitemap-generator": "^1.3.1",
+    "prettier": "^2.4.1",
     "typescript": "^4.2.2"
   }
 }

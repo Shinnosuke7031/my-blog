@@ -72,7 +72,7 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
                   isMobileScreen ? classes.flexContent_mob : classes.flexContent
                 }
               >
-                {index > 2 ? (
+                {/* {index > 2 ? (
                   <ListItemText
                     className={`${classes.title} ${classes.listSection}`}
                     primary={blog.title}
@@ -82,8 +82,12 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
                     className={`${classes.title} ${classes.listSection}`}
                     primary={isMobileScreen ? `${blog.title}` : `${blog.title}`}
                   />
-                )}
-                {!(index > 2) && (
+                )} */}
+                <ListItemText
+                  className={`${classes.title} ${classes.listSection}`}
+                  primary={blog.title}
+                />
+                {index < 1 && (
                   <p className={isMobileScreen ? 'fuwafuwa-mob' : 'fuwafuwa'}>
                     NEW!!
                   </p>
@@ -100,6 +104,7 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
           padding: 0;
         }
         div {
+          position: relative;
           list-style: none;
           margin: 0;
         }
@@ -108,6 +113,7 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
         }
         p {
           position: absolute;
+          top: -1rem;
           left: 0.3rem;
           color: #be0000;
         }
@@ -140,8 +146,8 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
         }
         .fuwafuwa-mob {
           position: absolute;
-          bottom: -0.1rem;
-          left: 6rem;
+          top: -1rem;
+          left: 0.1rem;
           -webkit-animation: fuwafuwa 2s infinite linear alternate;
           animation: fuwafuwa 2s infinite linear alternate;
         }

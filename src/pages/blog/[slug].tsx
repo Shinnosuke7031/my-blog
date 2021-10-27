@@ -64,16 +64,6 @@ const BlogPage: FC<BlogPageProps> = (props) => {
       <MyLayout>
         <div className="container">
           <div className={isPCScreen ? 'content' : 'content-mob'}>
-            <div className="ninja">
-              <NinjaAd
-                width={700}
-                height={90}
-                id="5e823f019e8a4622326ff899607b271f"
-                type="switch"
-                classAdName="admax-switch"
-              />
-            </div>
-            <br />
             <BlogContent blogStringData={props.blogStringData} />
             <br />
             <br />

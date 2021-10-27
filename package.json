@@ -13,7 +13,7 @@
     "@material-ui/data-grid": "^4.0.0-alpha.21",
     "@material-ui/icons": "^4.11.2",
     "gray-matter": "^4.0.2",
-    "next": "10.0.7",
+    "next": "^10.0.7",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-markdown": "^5.0.3",

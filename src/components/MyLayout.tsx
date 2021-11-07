@@ -25,7 +25,7 @@ const MyLayout: FC<ReactNode> = (props) => {
       <style jsx>{`
         .container {
           margin: 0 auto;
-          width: 100vw;
+          width: 100%;
         }
         .main {
           display: flex;

@@ -17,7 +17,14 @@ const BlogIndex: FC<Props> = (props) => {
   });
   return (
     <div style={{ position: 'sticky', top: '100px' }}>
-      <Paper elevation={10}>
+      <Paper
+        elevation={10}
+        style={{
+          overflow: 'scroll',
+          maxHeight: 'calc(100vh - 5rem - 350px)',
+          margin: '0 0 2rem 0',
+        }}
+      >
         <p className="index-title">Index</p>
         <ul>
           {headingData.map((data, index) =>

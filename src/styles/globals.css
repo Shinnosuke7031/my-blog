@@ -1,8 +1,10 @@
 html {
   font-size: 16px;
-  font-family:  '游ゴシック', YuGothic, 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3','ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, sans-serif;
+  font-family: '游ゴシック', YuGothic, 'Hiragino Kaku Gothic ProN',
+    'ヒラギノ角ゴ ProN W3', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo,
+    sans-serif;
   -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%;
 }
 
 *,
@@ -12,7 +14,7 @@ html {
 }
 
 body {
-  font-feature-settings: "palt";
+  font-feature-settings: 'palt';
   margin: 0;
 }
 
@@ -27,11 +29,10 @@ a {
 }
 
 code {
-  font-family: Consolas, Monaco, "Andale Mono", monospace;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
   /* padding: 0 0.5rem; */
   color: #ffffff;
   background-color: rgb(43, 43, 43);
-  word-wrap: break-word;
 }
 
 p code {

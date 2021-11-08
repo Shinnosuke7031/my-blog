@@ -32,7 +32,8 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
-    "prettier"
+    "prettier",
+    "plugin:eslint-plugin-react-hooks/recommended"
   ],
   "rules": {
     // TypeScirpt なので prop-types は要らない

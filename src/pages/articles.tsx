@@ -39,7 +39,7 @@ interface TablePaginationActionsProps {
   count: number;
   page: number;
   rowsPerPage: number;
-  onChangePage: (
+  onPageChange: (
     event: React.MouseEvent<HTMLButtonElement>,
     newPage: number,
   ) => void;
@@ -52,30 +52,30 @@ type Props = {
 function TablePaginationActions(props: TablePaginationActionsProps) {
   const classes = useStyles1();
   const theme = useTheme();
-  const { count, page, rowsPerPage, onChangePage } = props;
+  const { count, page, rowsPerPage, onPageChange } = props;
 
   const handleFirstPageButtonClick = (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    onChangePage(event, 0);
+    onPageChange(event, 0);
   };
 
   const handleBackButtonClick = (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    onChangePage(event, page - 1);
+    onPageChange(event, page - 1);
   };
 
   const handleNextButtonClick = (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    onChangePage(event, page + 1);
+    onPageChange(event, page + 1);
   };
 
   const handleLastPageButtonClick = (
     event: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    onChangePage(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
   return (
@@ -201,16 +201,42 @@ const Articles: FC<Props> = (props) => {
                     <TableCell component="th" scope="row">
                       <span style={{ fontWeight: 'bold' }}>{row.title}</span>
                     </TableCell>
-                    <TableCell style={{ width: 160 }} align="right">
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      style={{
+                        width: '20%',
+                        overflowWrap: 'break-word',
+                        wordWrap: 'break-word',
+                        //   height: '100%',
+                        //   display: 'flex',
+                        //   justifyContent: 'flex-start',
+                        //   alignItems: 'flex-start',
+                        //   flexWrap: 'wrap',
+                      }}
+                      align="right"
+                    >
                       {row.tag.map((tag, index) =>
                         index === row.tag.length - 1 ? (
-                          <span className="tag" key={index}>
+                          <span
+                            className="tag"
+                            key={index}
+                            style={{
+                              display: 'inline-block',
+                              overflowWrap: 'break-word',
+                              border: '1px solid #ffffff',
+                            }}
+                          >
                             {tag}
                           </span>
                         ) : (
                           <span
                             className="tag"
-                            style={{ margin: '0 0.5rem 0 0' }}
+                            style={{
+                              display: 'inline-block',
+                              overflowWrap: 'break-word',
+                              border: '1px solid #ffffff',
+                            }}
                             key={index}
                           >
                             {tag}
@@ -242,8 +268,8 @@ const Articles: FC<Props> = (props) => {
                     inputProps: { 'aria-label': 'rows per page' },
                     native: true,
                   }}
-                  onChangePage={handleChangePage}
-                  onChangeRowsPerPage={handleChangeRowsPerPage}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
                   ActionsComponent={TablePaginationActions}
                 />
               </TableRow>

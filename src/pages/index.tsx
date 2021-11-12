@@ -101,7 +101,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
   return {
     props: {
-      blogData: blogDataString.slice(0, 5),
+      blogData: blogDataString.slice(0, 7),
       title: siteData.default.title,
       description: siteData.default.description,
     },

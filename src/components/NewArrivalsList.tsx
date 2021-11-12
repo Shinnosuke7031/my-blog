@@ -15,8 +15,9 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       position: 'relative',
       overflow: 'auto',
-      maxHeight: 375,
+      height: 300,
       margin: '0 auto',
+      paddingBottom: 0,
     },
     root_mob: {
       width: '100%',
@@ -24,7 +25,8 @@ const useStyles = makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.paper,
       position: 'relative',
       overflow: 'auto',
-      maxHeight: 375,
+      height: 300,
+      paddingBottom: 0,
     },
     listSection: {
       backgroundColor: 'inherit',
@@ -72,17 +74,6 @@ const NewArrivalsList: FC<NewArrivalsListProps> = (props) => {
                   isMobileScreen ? classes.flexContent_mob : classes.flexContent
                 }
               >
-                {/* {index > 2 ? (
-                  <ListItemText
-                    className={`${classes.title} ${classes.listSection}`}
-                    primary={blog.title}
-                  />
-                ) : (
-                  <ListItemText
-                    className={`${classes.title} ${classes.listSection}`}
-                    primary={isMobileScreen ? `${blog.title}` : `${blog.title}`}
-                  />
-                )} */}
                 <ListItemText
                   className={`${classes.title} ${classes.listSection}`}
                   primary={blog.title}

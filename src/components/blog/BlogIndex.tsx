@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { Paper } from '@material-ui/core';
-import NinjaAd from '../ad/NinjaAd';
 
 type Props = {
   blogStringData: string;
@@ -77,11 +76,6 @@ const BlogIndex: FC<Props> = (props) => {
           }
         `}</style>
       </Paper>
-      <NinjaAd
-        id="1645c66c199fbcf4e6baf1fa953865be"
-        type="banner"
-        classAdName="admax-ads"
-      />
     </div>
   );
 };

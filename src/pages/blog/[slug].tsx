@@ -8,7 +8,6 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import { useMediaQuery } from 'react-responsive';
 import Paper from '@material-ui/core/Paper';
-import NinjaAd from '../../components/ad/NinjaAd';
 import BlogContent from '../../components/BlogContent';
 import SearchBlog from '../../components/blog/SearchBlog';
 
@@ -66,25 +65,6 @@ const BlogPage: FC<BlogPageProps> = (props) => {
           <div className={isPCScreen ? 'content' : 'content-mob'}>
             <BlogContent blogStringData={props.blogStringData} />
             <br />
-            <br />
-            <div className="banner-ad">
-              <a
-                href="https://px.a8.net/svt/ejp?a8mat=3HA5YE+12P73M+50+2I3IZ5"
-                rel="nofollow"
-              >
-                <img
-                  width="90%"
-                  alt=""
-                  src="https://www21.a8.net/svt/bgt?aid=210426278065&wid=001&eno=01&mid=s00000000018015133000&mc=1"
-                />
-              </a>
-              <img
-                width="1"
-                height="1"
-                src="https://www13.a8.net/0.gif?a8mat=3HA5YE+12P73M+50+2I3IZ5"
-                alt=""
-              />
-            </div>
           </div>
           {isPCScreen && (
             <div className="others">
@@ -102,11 +82,6 @@ const BlogPage: FC<BlogPageProps> = (props) => {
             </div>
           )}
         </div>
-        <NinjaAd
-          id="6f5bc9be8374105339be181245668f6f"
-          type="overlay"
-          classAdName="admax-ads"
-        />
       </MyLayout>
       <style jsx>{`
         .ninja {

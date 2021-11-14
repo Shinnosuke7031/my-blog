@@ -64,7 +64,6 @@ const BlogPage: FC<BlogPageProps> = (props) => {
         <div className="container">
           <div className={isPCScreen ? 'content' : 'content-mob'}>
             <BlogContent blogStringData={props.blogStringData} />
-            <br />
           </div>
           {isPCScreen && (
             <div className="others">

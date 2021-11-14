@@ -20,7 +20,7 @@ const BlogIndex: FC<Props> = (props) => {
         elevation={10}
         style={{
           overflow: 'scroll',
-          maxHeight: 'calc(100vh - 5rem - 350px)',
+          maxHeight: 'calc(100vh - 8rem)',
           margin: '0 0 2rem 0',
         }}
       >

@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export && next-sitemap --config sitemap.config.js",
+    "build": "next build && next-sitemap --config sitemap.config.js",
     "start": "next start",
     "format": "prettier --write 'src/**/*.js' && eslint ./src/",
     "lint": "eslint . --ext .ts,.tsx"
@@ -12,6 +12,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "babel-plugin-styled-components": "^1.13.3",
     "gray-matter": "^4.0.2",
     "next": "12",
     "react": "17.0.1",

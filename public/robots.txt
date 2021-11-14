@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://nosuke-blog.site
+
+# Sitemaps
+Sitemap: https://nosuke-blog.site/sitemap.xml

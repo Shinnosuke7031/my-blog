@@ -3,5 +3,4 @@ module.exports = {
   changefreq: 'weekly',
   generateRobotsTxt: true,
   sitemapSize: 7000,
-  outDir: './out',
 };

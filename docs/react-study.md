@@ -3,7 +3,7 @@ slug: react-study
 title: React初心者に進める勉強方法
 description: Reactに触れてから約10ヶ月になりますが、最初の勉強の仕方がわからずに苦労しました。これからReactを勉強しようとしている方向けに、勉強の仕方をまとめましたので、参考にして頂ければ幸いです。
 date: 2021/5/4
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.png?alt=media&token=b0fecf4e-7725-4a80-9b06-dc974f9d1e55
+imgpath: https://drive.google.com/uc?id=1ymy5zwd0U4hHmnYlbOuN97WskRAO7oHZ
 type: tect
 tag:
   - React

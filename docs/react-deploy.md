@@ -3,7 +3,7 @@ slug: react-deploy
 title: create-react-appで作ったReactアプリをVercelにデプロイ
 description: Reactを初めて触る人は、CRA(create-react-app)でプロジェクトを作ると思います。作ったものは、どうせなら公開して世界中の人にみてもらいたいですよね。デプロイの仕方は、色々あるのですが、特にデプロイが簡単なVercelについてまとめました。
 date: 2021/5/2
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.png?alt=media&token=b0fecf4e-7725-4a80-9b06-dc974f9d1e55
+imgpath: https://drive.google.com/uc?id=1ymy5zwd0U4hHmnYlbOuN97WskRAO7oHZ
 type: tect
 tag:
   - フロントエンド

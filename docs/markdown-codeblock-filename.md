@@ -3,7 +3,7 @@ slug: markdown-codeblock-filename
 title: react-syntax-highlighterでファイル名を表示する方法
 description: react-syntax-highlighterはハイライトをつけるためのものです。主にコードのハイライトに使います。react-markdownやgray-matterと一緒に使うことで、マークダウンをhtmlに変換できますが、そのプログラムのファイル名は表示できません。この記事では私が実装した表示方法を紹介します。
 date: 2021/3/10
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fmaterial-ui-1.png?alt=media&token=3d6f7654-34f1-4625-ba55-8ba4c9a2732c
+imgpath: https://drive.google.com/uc?id=1mN4RLvbtFKTLnntBp2VwiwMigI58G14w
 type: tect
 tag:
   - React

@@ -3,7 +3,7 @@ slug: associative-array-grouping
 title: PHPの連想配列をグルーピングする方法
 description: PHPの連想配列の各要素を、とあるkeyでグルーピングする方法をまとめました。
 date: 2021/5/3
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fnew-php-logo.png?alt=media&token=dff0076d-dce6-44a5-9107-248545e15d4e
+imgpath: https://drive.google.com/uc?id=1ztNKXBSItMcVQYIpH7X8eT0adIDAFfUl
 type: tect
 tag:
   - PHP

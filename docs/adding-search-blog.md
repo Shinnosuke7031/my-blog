@@ -3,7 +3,7 @@ slug: adding-search-blog
 title: Next.js製ブログサイトに記事検索機能を実装した話
 description: 当ブログに記事検索機能を追加しました。Next.jsのgetStaticPropsから得た情報を元に、検索できるようにしました。また、ReactのuseMemoを使うことでメモ化させることで余計な再計算を防いでます。Dynamic importも使ってます。
 date: 2021/3/11
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fnextjs-3.png?alt=media&token=68053a5f-f2f2-45ca-9ba1-779169974a92
+imgpath: https://drive.google.com/uc?id=1YV_k9O2SbPxI0ggWFbF46xIoHqdJylMy
 type: tect
 tag:
   - Next.js

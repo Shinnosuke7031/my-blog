@@ -3,7 +3,7 @@ slug: scala-akka-easy-api
 title: (Scala + Akka HTTP編)バックエンド初心者が簡単なAPIを作って学ぶ
 description: 色んな言語触ってAPI作ってみたいなーと思い(Go, Kotlin, Django, Flask, Express, ...)、その第1回はScalaで書いてみようと思いました。そこで、ScalaでAPIを作るのに便利なライブラリAkkaがあるとのことなので、これを使っていきます。
 date: 2021/2/27
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fscala-4.png?alt=media&token=7e3cf8be-bc29-48dc-9b20-28f1056f606f
+imgpath: https://drive.google.com/uc?id=13Sni7JI8YeG5vSQEjO7WZGX2OQpS4Tfe
 type: tech
 tag:
   - Scala

@@ -3,7 +3,7 @@ slug: webpack-babel-react
 title: (webpack + Babel編)React開発環境構築
 description: create-react-app(CRA)は簡単にReactのプロジェクトができますが、環境構築については丸投げですよね。webpackとBabelでReactの開発環境を1から自分で構築する方法をまとめました。
 date: 2021/3/1
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.png?alt=media&token=b0fecf4e-7725-4a80-9b06-dc974f9d1e55
+imgpath: https://drive.google.com/uc?id=1ymy5zwd0U4hHmnYlbOuN97WskRAO7oHZ
 type: tect
 tag:
   - React

@@ -3,37 +3,43 @@ slug: kotlin-springboot-easy-api
 title: (Kotlin + Spring Boot編)バックエンド初心者が簡単なAPIを作って学ぶ
 description: バックエンド初心者がKotlin + Spring Bootで簡単なAPIを作ったので、その記録をまとめました。
 date: 2021/2/27
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fkotlin-1.svg?alt=media&token=7e9ce6de-dbd8-4c6f-8ba9-1a34d3d810cb
+imgpath: https://drive.google.com/uc?id=1Qmial0EbZ4R5ZDiQj90F40xGgGpe6xs2
 type: tech
-tag: 
-- Kotlin
-- バックエンド
+tag:
+  - Kotlin
+  - バックエンド
 ---
 
 # はじめに
-春休みに入って時間に少し余裕が出てきたため、色んな言語触ってAPI作ってみたいなーと思いました。
-その第2回はKotlinで書いてみようと思いました。
 
-もはや説明する必要もないくらい、色んなサービスやAndroidアプリで広く使われています。
+春休みに入って時間に少し余裕が出てきたため、色んな言語触って API 作ってみたいなーと思いました。
+その第 2 回は Kotlin で書いてみようと思いました。
+
+もはや説明する必要もないくらい、色んなサービスや Android アプリで広く使われています。
 僕も一度は触ってみたかったので、春休み企画(仮)では絶対使うと決めてました。
 
-使うフレームワークはSpring Bootです。
+使うフレームワークは Spring Boot です。
 
-javaが動く環境やIntelliJ IDEAは用意できている前提で書いていきます。
+java が動く環境や IntelliJ IDEA は用意できている前提で書いていきます。
 
 ゴールは、
-- curl -H "Content-Type: application/json" -X POST -d '{[{データ1},{データ2}]}' http://localhost:8080/create-order と叩くと、DB(MySQL)に保存される
-- curl http://localhost:8080/item/[値] と叩くとDB(MySQL)から[値]に対応したJsonデータを返す
+
+- curl -H "Content-Type: application/json" -X POST -d '{[{データ 1},{データ 2}]}' http://localhost:8080/create-order と叩くと、DB(MySQL)に保存される
+- curl http://localhost:8080/item/[値] と叩くと DB(MySQL)から[値]に対応した Json データを返す
 
 # 動作確認
-## Spring Iinitializr
-まずは、アプリケーションの雛形を作っていきましょう。
-Dependenciesで、`Spring WEB` `Spling Data JPA` `MySQL Driver`を選択します。
-![spring initializr](https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fspringbootinit.png?alt=media&token=02ec186b-a6d6-4f9f-b305-cb144598c44f "spring initializr")
-雛形をダウンロードできたら、IntelliJ IDEAで開きましょう。
 
-## Controllerの作成
+## Spring Iinitializr
+
+まずは、アプリケーションの雛形を作っていきましょう。
+Dependencies で、`Spring WEB` `Spling Data JPA` `MySQL Driver`を選択します。
+![spring initializr](https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fspringbootinit.png?alt=media&token=02ec186b-a6d6-4f9f-b305-cb144598c44f 'spring initializr')
+雛形をダウンロードできたら、IntelliJ IDEA で開きましょう。
+
+## Controller の作成
+
 `com.example.demo`に`controller`パッケージを作り、`DemoController.kt`を作成します。
+
 ```kotlin:DemoController.kt
 package com.example.demo.controller
 import com.example.demo.repository.DemoRepository
@@ -50,17 +56,20 @@ class DemoController(private val demoRepository: DemoRepository) {
 ```
 
 ## サーバー起動
+
 動かすとサーバーが起動します。
 ターミナルで、`curl http://localhost:8080/api/hello`と入力すると、「Hello World.」と表示されます。
 これで動作確認できましたね！
 
-# APIの作成
-## MySQLとの連携
+# API の作成
 
-MySQLの環境は各自で用意お願いします。
-私は、DockerでMySQLのコンテナを立ち上げてます。
+## MySQL との連携
 
-`application.properties`にMySQLと接続する設定を書いていきます。
+MySQL の環境は各自で用意お願いします。
+私は、Docker で MySQL のコンテナを立ち上げてます。
+
+`application.properties`に MySQL と接続する設定を書いていきます。
+
 ```:application.properties
 spring.datasource.url = jdbc:mysql://localhost:13306/root?useSSL=false
 spring.datasource.username = root
@@ -72,8 +81,10 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDial
 spring.jpa.hibernate.ddl-auto = update
 ```
 
-## Modelの作成
+## Model の作成
+
 `com.example.demo`に`model`パッケージを作り、`Demo.kt`を作成します。
+
 ```kotlin:Demo.kt
 package com.example.demo.model
 
@@ -87,8 +98,10 @@ data class Demo(@Id @GeneratedValue var id: Long? = 0,
 }
 ```
 
-## Repositoryの作成
+## Repository の作成
+
 `com.example.demo`に`repository`パッケージを作り、`DemoRepository.kt`を作成します。
+
 ```kotlin:DemoRepository.kt
 package com.example.demo.repository
 
@@ -100,8 +113,10 @@ import org.springframework.stereotype.Repository
 interface DemoRepository: JpaRepository<Demo, Long>
 ```
 
-## Controller変更
-先ほど作成した`DemoController.kt`をMySQLの情報を返すように変更します。
+## Controller 変更
+
+先ほど作成した`DemoController.kt`を MySQL の情報を返すように変更します。
+
 ```kotlin:DemoController.kt
 package com.example.demo.controller
 import com.example.demo.model.Demo
@@ -127,31 +142,39 @@ class DemoController() {
 ```
 
 ## サーバー起動
+
 動かすとサーバーが起動します。
 ターミナルで、
+
 ```none
 curl -H "Content-Type: application/json" -X POST -d '{"name": "hoge", "num": 10}' http://localhost:8080/api/create-order
 curl -H "Content-Type: application/json" -X POST -d '{"name": "hogehoge", "num": 100}' http://localhost:8080/api/create-order
 ```
-と打つと、MySQLに保存され、
+
+と打つと、MySQL に保存され、
+
 ```none
 curl http://localhost:8080/api/item/10
 ```
+
 と打つと、先ほど保存したデータで、`"num"`が`10`のデータが返ってきます。
 これで完成ですね！
 
 # まとめ
-前回使った[Scala + Akka HTTP編](https://nosuke-blog.site/blog/scala-akka-easy-api)と比較すると、非常に簡単にAPIを作ることができました。
+
+前回使った[Scala + Akka HTTP 編](https://nosuke-blog.site/blog/scala-akka-easy-api)と比較すると、非常に簡単に API を作ることができました。
 
 やはり、
-- Scala : Javaを進化させた言語
-- Kotlin : Javaをもっと簡単に安全に
-というような違い(私の考えです。違ってたらごめんなさい)を実際に感じれたなと思います。
 
-普段の研究では、C++を使っているため、Javaには大きな壁を感じませんでした。
-そのため、Kotlinもすぐ扱えたのかなといった感じですかね
+- Scala : Java を進化させた言語
+- Kotlin : Java をもっと簡単に安全に
+  というような違い(私の考えです。違ってたらごめんなさい)を実際に感じれたなと思います。
+
+普段の研究では、C++を使っているため、Java には大きな壁を感じませんでした。
+そのため、Kotlin もすぐ扱えたのかなといった感じですかね
 
 とはいえ、言語にプラスして、ライブラリやフレームワークの使い方が大事になってくるので、実際に開発するときはもっと勉強して慣れてからでないとだめですよね <-- あたりまえ、あたりまえ、あたりまえ体操
 
 # 余談
-今回のKotlinを春休み企画(仮)第１弾にする予定でしたが、Kotlinを勉強していたらScalaとの違いを調べてしまい、そのままScalaに浮気してしまいましたw
+
+今回の Kotlin を春休み企画(仮)第１弾にする予定でしたが、Kotlin を勉強していたら Scala との違いを調べてしまい、そのまま Scala に浮気してしまいました w

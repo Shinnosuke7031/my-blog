@@ -3,7 +3,7 @@ slug: use-key
 title: ReactでkeyDownイベントを簡単に扱えるHooks「useKey | Rooks」
 description: Reactアプリでキーボードが押されたときに処理させたい場合は、様々なHooksを用意してくれるライブラリー「Rooks」のuseKeyがおすすめです。useKeyの基本的な使い方をまとめています。
 date: 2021/10/14
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Freact-2.png?alt=media&token=b0fecf4e-7725-4a80-9b06-dc974f9d1e55
+imgpath: https://drive.google.com/uc?id=1ymy5zwd0U4hHmnYlbOuN97WskRAO7oHZ
 type: tect
 tag:
   - フロントエンド

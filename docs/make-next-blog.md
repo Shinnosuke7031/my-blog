@@ -3,7 +3,7 @@ slug: make-next-blog
 title: Next.jsでSSGブログサイトを作った話
 description: 当サイトは、Next.jsで作りました。なぜNext.jsを採用したのかを書いていきます。最も大きな理由はSSG(静的サイト生成)です。また、ルーティングもすごく簡単で、ストレスフリーに開発できます。
 date: 2021/3/2
-imgpath: https://firebasestorage.googleapis.com/v0/b/test-f825e.appspot.com/o/images%2Fblog%2Fblog-icon%2Fnextjs-3.png?alt=media&token=68053a5f-f2f2-45ca-9ba1-779169974a92
+imgpath: https://drive.google.com/uc?id=1YV_k9O2SbPxI0ggWFbF46xIoHqdJylMy
 type: tect
 tag:
   - Next.js
